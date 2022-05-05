@@ -38,6 +38,12 @@ set( INCLUDE
         include/text.h
         include/snow.h
         include/minimap.h
+        include/vertexbuffer.h
+        include/glCall.h
+        include/IndexBuffer.h
+        include/VertexArray.h
+        include/VertexBufferLayout.h
+        include/Shader.h
 
 )
 set( SRCS
@@ -50,7 +56,13 @@ set( SRCS
         src/text.cpp
         src/snow.cpp
         src/minimap.cpp
+        src/vertexbuffer.cpp
+        src/glCall.cpp
+        src/IndexBuffer.cpp
+        src/VertexArray.cpp
+        src/Shader.cpp
 	app/main.cpp
+
 )
 
 add_executable(${PROJECT_NAME} ${INCLUDE} ${SRCS})
