@@ -43,38 +43,32 @@ void Landscape::privateInit()
 {
   // Create vertex arrays
 
-    float size = 50.0f;
-    vertexArray_.push_back(glm::vec3(-2*size,-53.0f,2*size));
-    vertexArray_.push_back(glm::vec3(2*size,-53.0f,2*size));
-    vertexArray_.push_back(glm::vec3(2*size,-53.0f,-2*size));
-    vertexArray_.push_back(glm::vec3(-2*size,-53.0f,-2*size));
+//    float size = 50.0f;
+//    vertexArray_.push_back(glm::vec3(-2*size,-53.0f,2*size));
+//    vertexArray_.push_back(glm::vec3(2*size,-53.0f,2*size));
+//    vertexArray_.push_back(glm::vec3(2*size,-53.0f,-2*size));
+//    vertexArray_.push_back(glm::vec3(-2*size,-53.0f,-2*size));
 
-    vertexArray_.push_back(glm::vec3(-6*size,-53.0f,2*size));
-    vertexArray_.push_back(glm::vec3(-2*size,-53.0f,2*size));
-    vertexArray_.push_back(glm::vec3(-2*size,-53.0f,-2*size));
-    vertexArray_.push_back(glm::vec3(-6*size,-53.0f,-2*size));
+//    vertexArray_.push_back(glm::vec3(-6*size,-53.0f,2*size));
+//    vertexArray_.push_back(glm::vec3(-2*size,-53.0f,2*size));
+//    vertexArray_.push_back(glm::vec3(-2*size,-53.0f,-2*size));
+//    vertexArray_.push_back(glm::vec3(-6*size,-53.0f,-2*size));
 
-    vertexArray_.push_back(glm::vec3(2*size,-53.0f,2*size));
-    vertexArray_.push_back(glm::vec3(6*size,-53.0f,2*size));
-    vertexArray_.push_back(glm::vec3(6*size,-53.0f,-2*size));
-    vertexArray_.push_back(glm::vec3(2*size,-53.0f,-2*size));
-
-
-    unsigned int indices[] = {
-                0,1,2,3,
-                4,5,6,7,
-                8,9,10,11
+//    vertexArray_.push_back(glm::vec3(2*size,-53.0f,2*size));
+//    vertexArray_.push_back(glm::vec3(6*size,-53.0f,2*size));
+//    vertexArray_.push_back(glm::vec3(6*size,-53.0f,-2*size));
+//    vertexArray_.push_back(glm::vec3(2*size,-53.0f,-2*size));
 
 
-};
 
-    vb = VertexBuffer(vertexArray_.data(), 12* 3 * sizeof(float));
+
+//    vb = VertexBuffer(vertexArray_.data(), 12* 3 * sizeof(float));
 
     VertexBufferLayout layout;
     layout.Push<float>(3);
     va.AddBuffer(vb,layout);
 
-    ib = IndexBuffer(indices, 12);
+//    ib = IndexBuffer(indices, 12);
 
 
     va.Unbind();

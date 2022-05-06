@@ -1,7 +1,7 @@
 #pragma once
 
 #include <windows.h>
-#include <GL/gl.h>
+//#include <GL/gl.h>
 #include <GL/glu.h>
 
 #include "../../glm-master/glm/gtc/matrix_transform.hpp"
