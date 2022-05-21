@@ -4,6 +4,8 @@
 #include "../../glm-master/glm/gtc/matrix_transform.hpp"
 #include <iostream>
 #include "../Include/stb_image.h"
+#include "../../glm-master/glm/gtx/normal.hpp"
+
 static GLuint texName;
 static GLint fogMode;
 
@@ -218,8 +220,10 @@ void Character::privateRender()
      glEnableClientState(GL_VERTEX_ARRAY);
      glVertexPointer(3,GL_FLOAT,0,billboardArray_.data());
 
-      glDrawArrays(GL_QUADS,0,4);
+     glDrawArrays(GL_QUADS,0,4);
 
+      glEnableClientState(GL_NORMAL_ARRAY);
+      glNormalPointer(GL_FLOAT,0,billboardNormal_.data());
 
 
 
@@ -240,6 +244,12 @@ void Character::DrawBillboard(){
     billboardArray_.push_back(glm::vec3(2*size_,2*size_,size_));
     billboardArray_.push_back(glm::vec3(2*size_,4*size_,size_));
     billboardArray_.push_back(glm::vec3(-2*size_,4*size_,size_));
+
+    billboardNormal_.push_back(glm::vec3(0.0f,0.0f,1.0f));
+    billboardNormal_.push_back(glm::vec3(0.0f,0.0f,1.0f));
+    billboardNormal_.push_back(glm::vec3(0.0f,0.0f,1.0f));
+    billboardNormal_.push_back(glm::vec3(0.0f,0.0f,1.0f));
+
 }
 void Character::CreateTexture(){
 
@@ -247,6 +257,7 @@ void Character::CreateTexture(){
      billboardTexture_.push_back(glm::vec2(1.0f,1.0f));
       billboardTexture_.push_back(glm::vec2(1.0f,0.0f));
     billboardTexture_.push_back(glm::vec2(0.0f,0.0f));
+
 
 
 }

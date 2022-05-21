@@ -67,6 +67,8 @@ protected:
   // This is the transformation-matrix of the scene object.
   // Relative to the object's parent. Defaults to the identity matrix.
   glm::mat4 matrix_;
+  glm::mat4 projectionMatrix_;
+  glm::mat4 viewMatrix_;
 
 private:
   // List of all SceneObjects that belong to the current object.

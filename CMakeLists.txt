@@ -44,6 +44,8 @@ set( INCLUDE
         include/VertexArray.h
         include/VertexBufferLayout.h
         include/Shader.h
+        include/Basic.shader
+        include/Texture.h
 
 )
 set( SRCS
@@ -61,7 +63,9 @@ set( SRCS
         src/IndexBuffer.cpp
         src/VertexArray.cpp
         src/Shader.cpp
+        src/Texture.cpp
 	app/main.cpp
+
 
 )
 

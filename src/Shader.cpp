@@ -6,18 +6,22 @@
 #include <sstream>
 
 
-
-Shader::Shader(const std::string& filepath)
-	:m_FilePath(filepath), m_RendererID(0)
+Shader::Shader()
 {
-    ShaderProgramSource source = ParseShader(filepath);
-    m_RendererID = CreateShader(source.VertexSource, source.FragmentSource);
-	 
+
 }
 
 Shader::~Shader()
 {
     GLCall(glDeleteProgram(m_RendererID));
+}
+
+void Shader::initShader(const std::string& filepath)
+{
+    this->m_FilePath = filepath;
+    ShaderProgramSource source = ParseShader(filepath);
+    m_RendererID = CreateShader(source.VertexSource, source.FragmentSource);
+
 }
 
  ShaderProgramSource Shader::ParseShader(const std::string& filepath) {
@@ -114,10 +118,10 @@ int Shader::GetUniformLocation(const std::string& name)
     if (m_UniformLocationCache.find(name) != m_UniformLocationCache.end())
         return m_UniformLocationCache[name];
 
-	GLCall( int location = glGetUniformLocation(m_RendererID,name.c_str()));
+    GLCall( int location = glGetUniformLocation(m_RendererID,name.c_str()));
     if (location == -1)
         std::cout << "Warning: uniform ' " << name << "' does not exist!" << std::endl;
-  
+
         m_UniformLocationCache[name] = location;
 
     return location;

@@ -29,6 +29,7 @@ class Character : public SceneObject
       float size_ = 50.0f;
       unsigned int texture;
       std::vector<glm::vec3> billboardArray_;
+      std::vector<glm::vec3> billboardNormal_;
       std::vector<glm::vec2> billboardTexture_;
     
 };
