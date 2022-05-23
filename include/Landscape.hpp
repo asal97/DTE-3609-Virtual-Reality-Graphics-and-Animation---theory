@@ -38,22 +38,6 @@ private:
 
   float size = 50.0f;
 
-//  float positions[3*4*3] = {
-//      -2*size,-53.0f,2*size,
-//      2*size,-53.0f,2*size,
-//      2*size,-53.0f,-2*size,
-//      -2*size,-53.0f,-2*size,
-
-//      -6*size,-53.0f,2*size,
-//     -2*size,-53.0f,2*size,
-//      -2*size,-53.0f,-2*size,
-//      -6*size,-53.0f,-2*size,
-
-//      2*size,-53.0f,2*size,
-//      6*size,-53.0f,2*size,
-//      6*size,-53.0f,-2*size,
-//      2*size,-53.0f,-2*size,
-//       };
 
   float positions[5*4*3] = {
       -2*size, -53.0f, 2*size, 0.0f, 0.0f,
@@ -71,11 +55,9 @@ private:
       6*size, -53.0f, -2*size, 1.0f, 1.0f,
       2*size, -53.0f, -2*size, 0.0f, 1.0f,
        };
-  std::vector<glm::vec3>
-      vertexArray_; // Maybe two-dim vector and several arrays
-                    // normal array.
-                    // texture coord array
 
+  std::vector<glm::vec3>
+      vertexArray_;
 
 
 

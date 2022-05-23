@@ -23,7 +23,7 @@ void GameManager::privateInit()
 
 
 
-   glEnable(GL_DEPTH_TEST);
+//   glEnable(GL_DEPTH_TEST);
 
 
    glEnable(GL_NORMALIZE);
@@ -50,6 +50,10 @@ void GameManager::privateInit()
 
     minimap_.reset(new Minimap());
     this->addSubObject(minimap_);
+
+    skybox_.reset(new Skybox());
+    this->addSubObject(skybox_);
+
 
 
 }

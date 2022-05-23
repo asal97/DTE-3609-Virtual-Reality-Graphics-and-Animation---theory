@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 
 
 class Texture
@@ -12,10 +13,12 @@ private:
 
 public:
     Texture(const std::string& path);
+    Texture(const std::vector<std::string> faces);
 	~Texture();
 
 	void Bind(unsigned int slot = 0) const;
-	void Unbind() const;
+    void BindCubeMap(unsigned int slot=0) const;
+    void Unbind() const;
 
 	inline int GetWidth() const { return m_Width; }
 	inline int GetHeight() const { return m_Height; }

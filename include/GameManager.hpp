@@ -13,6 +13,7 @@
 #include "Camera.hpp"
 #include "Text.h"
 #include "Snow.h"
+#include "Skybox.h"
 
 
 class GameManager : public SceneObject
@@ -36,5 +37,6 @@ class GameManager : public SceneObject
     std::shared_ptr<Text> text_;
     std::shared_ptr<Snow> snow_;
     std::shared_ptr<Minimap> minimap_;
+    std::shared_ptr<Skybox> skybox_;
 };
 

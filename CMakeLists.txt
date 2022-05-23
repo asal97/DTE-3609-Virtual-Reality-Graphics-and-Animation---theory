@@ -45,7 +45,9 @@ set( INCLUDE
         include/VertexBufferLayout.h
         include/Shader.h
         include/Basic.shader
+        include/Skybox.shader
         include/Texture.h
+        include/Skybox.h
 
 )
 set( SRCS
@@ -64,6 +66,7 @@ set( SRCS
         src/VertexArray.cpp
         src/Shader.cpp
         src/Texture.cpp
+        src/Skybox.cpp
 	app/main.cpp
 
 
