@@ -40,6 +40,8 @@ Texture::Texture(const std::vector<std::string> faces)
         m_LocalBuffer = stbi_load(faces[i].c_str(), &m_Width, &m_Height, &m_BPP, 4);
         GLCall(glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,0,GL_RGBA8,m_Width
             ,m_Height,0,GL_RGBA,GL_UNSIGNED_BYTE,m_LocalBuffer));
+        if(!m_LocalBuffer)
+            std::cout<<"error thing \n"<<faces[i]<<"\n"<<stbi_failure_reason()<<std::endl;
         if (m_LocalBuffer)
             stbi_image_free(m_LocalBuffer);
     }

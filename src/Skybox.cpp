@@ -8,6 +8,8 @@
 #include <filesystem>
 
 Skybox::Skybox(){
+    auto scale = glm::scale(glm::mat4(1.0f),glm::vec3(1000.0f,1000.0f,1000.0f));
+    matrix_ = scale;
 }
 
 
@@ -15,10 +17,11 @@ void Skybox::privateInit(){
 
     VertexBufferLayout layout;
     layout.Push<float>(3);
+    layout.Push<float>(2);
     va.AddBuffer(vb,layout);
     shader.initShader("D:/UIT/VG-3609/start_code/include/Skybox.shader");
     shader.Bind();
-//    shader.SetUniform4f("u_Color",0.2f,0.3f,0.8f,1.0f);
+    shader.SetUniform4f("u_Color",0.2f,0.3f,0.8f,1.0f);
 
 
     texture.BindCubeMap(texSlot);
@@ -44,7 +47,7 @@ void Skybox::privateRender(){
     vb.Bind();
     va.Bind();
     ib.Bind();
-    GLCall(glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, nullptr));
+    GLCall(glDrawElements(GL_QUADS, ib.GetCount(), GL_UNSIGNED_INT, nullptr));
 
     glDepthMask(GL_TRUE);
 

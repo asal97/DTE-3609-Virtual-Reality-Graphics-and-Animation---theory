@@ -30,7 +30,7 @@ void Landscape::privateInit()
 
     texture.Bind(texSlot);
     shader.SetUniform1i("u_Texture", texSlot);
-    projectionMatrix_ = glm::perspective(glm::radians(60.0f), 900.0f / 700.0f, 1.0f, 3000.0f);
+    projectionMatrix_ = glm::perspective(glm::radians(60.0f), 900.0f / 700.0f, 1.0f, 30000.0f);
 
     texture.Unbind();
     va.Unbind();
