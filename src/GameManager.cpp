@@ -52,7 +52,10 @@ void GameManager::privateInit()
 //    this->addSubObject(minimap_);
 
     skybox_.reset(new Skybox());
-    this->addSubObject(skybox_);
+this->addSubObject(skybox_);
+
+    billboard_.reset(new Billboard());
+    this->addSubObject(billboard_);
 
 
 

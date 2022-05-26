@@ -48,9 +48,10 @@ set( INCLUDE
         include/Skybox.shader
         include/Texture.h
         include/Skybox.h
+        include/Billboard.h
 
 )
-set( SRCS
+set(SRCS
         src/Landscape.cpp
 	src/Camera.cpp
 	src/GameManager.cpp
@@ -67,6 +68,7 @@ set( SRCS
         src/Shader.cpp
         src/Texture.cpp
         src/Skybox.cpp
+        src/Billboard.cpp
 	app/main.cpp
 
 

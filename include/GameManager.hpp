@@ -14,6 +14,7 @@
 #include "Text.h"
 #include "Snow.h"
 #include "Skybox.h"
+#include "Billboard.h"
 
 
 class GameManager : public SceneObject
@@ -38,5 +39,6 @@ class GameManager : public SceneObject
     std::shared_ptr<Snow> snow_;
     std::shared_ptr<Minimap> minimap_;
     std::shared_ptr<Skybox> skybox_;
+        std::shared_ptr<Billboard> billboard_;
 };
 

@@ -6,6 +6,8 @@
 
 Landscape::Landscape()
 {
+    auto scale = glm::scale(glm::mat4(1.0f),glm::vec3(5.0f,1.0f,5.0f));
+    matrix_ = scale;
 }
 
 Landscape::~Landscape()

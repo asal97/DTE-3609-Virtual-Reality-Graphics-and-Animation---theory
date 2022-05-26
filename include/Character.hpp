@@ -29,9 +29,6 @@ class Character : public SceneObject
     void privateInit();
 		void privateRender();
 		void privateUpdate();
-        void DrawBillboard();
-        void CreateTexture();
-        void DrawTexture();
 
 
 	private:
@@ -85,11 +82,6 @@ class Character : public SceneObject
           float speed_;
           float life_;
           float armor_;
-
-          unsigned int texture1;
-          std::vector<glm::vec3> billboardArray_;
-          std::vector<glm::vec3> billboardNormal_;
-          std::vector<glm::vec2> billboardTexture_;
     
 };
 
