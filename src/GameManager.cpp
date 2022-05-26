@@ -33,8 +33,8 @@ void GameManager::privateInit()
 
   // Adding the camera to the scene
   cam_.reset(new Camera());
-  snow_.reset(new Snow());
-     this->addSubObject(snow_);
+//  snow_.reset(new Snow());
+//     this->addSubObject(snow_);
 
 
 

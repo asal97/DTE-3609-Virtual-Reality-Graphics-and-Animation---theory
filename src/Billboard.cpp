@@ -31,6 +31,9 @@ void Billboard::privateInit()
 }
 void Billboard::privateRender()
 {
+    glEnable( GL_BLEND );
+    glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+
     glEnable(GL_COLOR_MATERIAL);
     glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 
@@ -66,6 +69,7 @@ void Billboard::privateRender()
 
 
    glDisable(GL_COLOR_MATERIAL);
+   glDisable(GL_BLEND);
 
 }
 void Billboard::DrawTexture(){

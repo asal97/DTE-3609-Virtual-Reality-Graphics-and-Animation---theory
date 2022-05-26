@@ -44,11 +44,14 @@ set( INCLUDE
         include/VertexArray.h
         include/VertexBufferLayout.h
         include/Shader.h
-        include/Basic.shader
-        include/Skybox.shader
+
         include/Texture.h
         include/Skybox.h
         include/Billboard.h
+
+        include/Basic.shader
+        include/Skybox.shader
+        include/Landscape.shader
 
 )
 set(SRCS

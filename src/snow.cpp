@@ -76,6 +76,9 @@ void Snow::privateInit() {
 
 void Snow::privateRender() {
 
+    glEnable( GL_BLEND );
+    glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texName_);
     glLoadIdentity();										// Reset The ModelView Matrix
@@ -111,6 +114,8 @@ void Snow::privateRender() {
     }
     glBindTexture(GL_TEXTURE_2D, NULL);
     glDisable(GL_TEXTURE_2D);
+    glDisable(GL_BLEND);
+
 
 
 }

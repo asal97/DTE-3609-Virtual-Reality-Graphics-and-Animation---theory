@@ -24,17 +24,20 @@ void Landscape::privateInit()
     layout.Push<float>(3);
     layout.Push<float>(2);
     va.AddBuffer(vb,layout);
-    shader.initShader("D:/UIT/VG-3609/start_code/include/Basic.shader");
+    shader.initShader("D:/UIT/VG-3609/start_code/include/Landscape.shader");
     shader.Bind();
-    shader.SetUniform4f("u_Color",0.2f,0.3f,0.8f,1.0f);
+//    shader.SetUniform4f("u_Color",0.2f,0.3f,0.8f,1.0f);
 
 
 
     texture.Bind(texSlot);
     shader.SetUniform1i("u_Texture", texSlot);
+    texture1.Bind(texSlot + 1);
+    shader.SetUniform1i("u_Texture2", texSlot + 1);
     projectionMatrix_ = glm::perspective(glm::radians(60.0f), 900.0f / 700.0f, 1.0f, 30000.0f);
 
     texture.Unbind();
+    texture1.Unbind();
     va.Unbind();
     vb.Unbind();
     ib.Unbind();
@@ -48,6 +51,7 @@ void Landscape::privateRender()
 
        shader.Bind();
        texture.Bind(texSlot);
+       texture1.Bind(texSlot + 1);
 
 
        shader.SetUniformMat4f("u_MVP",projectionMatrix_ * viewMatrix_* matrix_);
@@ -65,6 +69,7 @@ void Landscape::privateRender()
     ib.Unbind();
     vb.Unbind();
     texture.Unbind();
+    texture1.Unbind();
 
   // Render the Landscape
 }

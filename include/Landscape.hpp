@@ -66,6 +66,7 @@ private:
   IndexBuffer ib = IndexBuffer(indices, 12);
   Shader shader;
   Texture texture = Texture("D:/UIT/VG-3609/start_code/assets/road.png");
+  Texture texture1 = Texture("D:/UIT/VG-3609/start_code/assets/Tile.jpg");
   unsigned int texSlot = 0;
 
 
