@@ -11,7 +11,7 @@ GameManager::~GameManager()
 void GameManager::privateInit()
 {
   // Set default OpenGL states
-   glEnable(GL_CULL_FACE);
+//   glEnable(GL_CULL_FACE);
 
    //Adding fog in game application
 

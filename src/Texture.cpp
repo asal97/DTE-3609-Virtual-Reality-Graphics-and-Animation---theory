@@ -38,7 +38,7 @@ Texture::Texture(const std::vector<std::string> faces)
 
     for(unsigned int i=0;i<faces.size();i++){
         m_LocalBuffer = stbi_load(faces[i].c_str(), &m_Width, &m_Height, &m_BPP, 4);
-        GLCall(glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,0,GL_RGBA8,m_Width
+        GLCall(glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,0,GL_RGB,m_Width
             ,m_Height,0,GL_RGBA,GL_UNSIGNED_BYTE,m_LocalBuffer));
         if(!m_LocalBuffer)
             std::cout<<"error thing \n"<<faces[i]<<"\n"<<stbi_failure_reason()<<std::endl;
@@ -69,9 +69,9 @@ void Texture::Bind(unsigned int slot) const
 	GLCall(glBindTexture(GL_TEXTURE_2D, m_RenderID));
 
 }
-void Texture::BindCubeMap(unsigned int slot) const
+void Texture::BindCubeMap() const
 {
-    GLCall(glActiveTexture(GL_TEXTURE_CUBE_MAP + slot));
+    GLCall(glActiveTexture(GL_TEXTURE0));
     GLCall(glBindTexture(GL_TEXTURE_CUBE_MAP, m_RenderID));
 }
 
