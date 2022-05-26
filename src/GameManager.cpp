@@ -48,8 +48,8 @@ void GameManager::privateInit()
                     "Hi", {100.0f,100.0f, 50.0f}, GLUT_STROKE_ROMAN, {1.0f, 1.0f, 1.0f} ));
     this->addSubObject(text_);
 
-    minimap_.reset(new Minimap());
-    this->addSubObject(minimap_);
+//    minimap_.reset(new Minimap());
+//    this->addSubObject(minimap_);
 
     skybox_.reset(new Skybox());
     this->addSubObject(skybox_);

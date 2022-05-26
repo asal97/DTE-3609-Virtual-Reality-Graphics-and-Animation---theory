@@ -1,10 +1,9 @@
 
 #include "../include/Character.hpp"
-#include "../../glm-master/glm/glm.hpp"
-#include "../../glm-master/glm/gtc/matrix_transform.hpp"
+
 #include <iostream>
 #include "../Include/stb_image.h"
-#include "../../glm-master/glm/gtx/normal.hpp"
+
 
 static GLuint texName;
 static GLint fogMode;
@@ -22,160 +21,107 @@ void Character::privateInit()
 
     glShadeModel(GL_SMOOTH);
 
+    VertexBufferLayout layout;
+    layout.Push<float>(3);
+    layout.Push<float>(2);
+    va.AddBuffer(vb,layout);
+    shader.initShader("D:/UIT/VG-3609/start_code/include/Basic.shader");
+    shader.Bind();
+    shader.SetUniform4f("u_Color",0.2f,0.3f,0.8f,1.0f);
 
 
-    float size_ = 50.0f;
-    auto list_id = glGenLists(1);
-    glNewList(list_id,GL_COMPILE);
-        glBegin(GL_QUADS);
-          // Near Face
+
+    texture.Bind(texSlot);
+    shader.SetUniform1i("u_Texture", texSlot);
+    projectionMatrix_ = glm::perspective(glm::radians(60.0f), 900.0f / 700.0f, 1.0f, 30000.0f);
+
+    texture.Unbind();
+    va.Unbind();
+    vb.Unbind();
+    ib.Unbind();
+    shader.Unbind();
+
+
+
+
+
+
+//    auto list_id = glGenLists(1);
+//    glNewList(list_id,GL_COMPILE);
+//        glBegin(GL_QUADS);
         //front
 
-//           glNormal3f( 0.0f, 0.0f, 1.0f);glTexCoord2f(0.0f, 0.0f); glVertex3f(-size_, -size_,  size_);
 
-//           glNormal3f( 0.0f, 0.0f, 1.0f);glTexCoord2f(1.0f, 0.0f); glVertex3f( size_, -size_,  size_);
-//           glNormal3f( 0.0f, 0.0f, 1.0f);glTexCoord2f(1.0f, 1.0f); glVertex3f( size_,  size_,  size_);
-//           glNormal3f( 0.0f, 0.0f, 1.0f);glTexCoord2f(0.0f, 1.0f);  glVertex3f( -size_,  size_,  size_);
-//        //top
+//                glNormal3f( -1.0f, -1.0f, 1.0f);glTexCoord2f(0.0f, 0.0f); glVertex3f(-size_, -size_,  size_);
+//                glNormal3f( 1.0f, -1.0f, 1.0f);glTexCoord2f(1.0f, 0.0f); glVertex3f( size_, -size_,  size_);
+//                glNormal3f( 1.0f, 1.0f, 1.0f);glTexCoord2f(1.0f, 1.0f); glVertex3f( size_,  size_,  size_);
+//                glNormal3f( -1.0f, 1.0f, 1.0f);glTexCoord2f(0.0f, 1.0f);  glVertex3f( -size_,  size_,  size_);
+//             //top
 
-//            glNormal3f( 0.0f, 1.0f, 0.0f);glTexCoord2f(0.0f, 0.0f); glVertex3f(-size_, size_,  size_);
-//            glNormal3f( 0.0f, 1.0f, 0.0f);glTexCoord2f(1.0f, 0.0f); glVertex3f( size_, size_,  size_);
-//            glNormal3f( 0.0f, 1.0f, 0.0f);glTexCoord2f(1.0f, 1.0f); glVertex3f( size_,  size_,  -size_);
-//            glNormal3f( 0.0f, 1.0f, 0.0f);glTexCoord2f(0.0f, 1.0f);  glVertex3f( -size_,  size_,  -size_);
-//        //right
-//          glNormal3f( 1.0f, 0.0f, 0.0f);
-//              glTexCoord2f(0.0f, 0.0f); glVertex3f(size_, -size_,  size_);
-//              glTexCoord2f(1.0f, 0.0f); glVertex3f( size_, -size_,  -size_);
-//              glTexCoord2f(1.0f, 1.0f); glVertex3f( size_,  size_,  -size_);
-//              glTexCoord2f(0.0f, 1.0f);  glVertex3f( size_,  size_,  size_);
-//           //left
-//            glNormal3f( -1.0f, 0.0f, 1.0f);
-//                glTexCoord2f(0.0f, 0.0f); glVertex3f(-size_, -size_, -size_);
-//                glTexCoord2f(1.0f, 0.0f); glVertex3f( -size_, -size_,  size_);
-//                glTexCoord2f(1.0f, 1.0f); glVertex3f( -size_,  size_,  size_);
-//                glTexCoord2f(0.0f, 1.0f);  glVertex3f( -size_,  size_,  -size_);
-//               //back
-//            glNormal3f( 0.0f, 0.0f, -1.0f);
-//                glTexCoord2f(0.0f, 0.0f); glVertex3f(size_, -size_,  -size_);
-//                glTexCoord2f(1.0f, 0.0f); glVertex3f( -size_, -size_,  -size_);
-//                glTexCoord2f(1.0f, 1.0f); glVertex3f( -size_,  size_,  -size_);
-//                glTexCoord2f(0.0f, 1.0f);  glVertex3f( size_,  size_,  -size_);
-//            //buttom
-//            glNormal3f( 0.0f, -1.0f, 0.0f);
-//                glTexCoord2f(0.0f, 0.0f); glVertex3f(-size_, -size_,  -size_);
-//                glTexCoord2f(1.0f, 0.0f); glVertex3f( size_, -size_,  -size_);
-//                glTexCoord2f(1.0f, 1.0f); glVertex3f( size_,  -size_,  size_);
-//                glTexCoord2f(0.0f, 1.0f);  glVertex3f( -size_, -size_,  size_);
-            //back
+//                 glNormal3f( -1.0f, 1.0f, 1.0f);glTexCoord2f(0.0f, 0.0f); glVertex3f(-size_, size_,  size_);
+//                 glNormal3f( 1.0f, 1.0f, 1.0f);glTexCoord2f(1.0f, 0.0f); glVertex3f( size_, size_,  size_);
+//                 glNormal3f( 1.0f, 1.0f, -1.0f);glTexCoord2f(1.0f, 1.0f); glVertex3f( size_,  size_,  -size_);
+//                 glNormal3f( -1.0f, 1.0f, -1.0f);glTexCoord2f(0.0f, 1.0f);  glVertex3f( -size_,  size_,  -size_);
+//             //right
 
+//                   glNormal3f( 1.0f, -1.0f, 1.0f);glTexCoord2f(0.0f, 0.0f); glVertex3f(size_, -size_,  size_);
+//                   glNormal3f( 1.0f, -1.0f, -1.0f);glTexCoord2f(1.0f, 0.0f); glVertex3f( size_, -size_,  -size_);
+//                   glNormal3f( 1.0f, 1.0f, -1.0f);glTexCoord2f(1.0f, 1.0f); glVertex3f( size_,  size_,  -size_);
+//                   glNormal3f( 1.0f, 1.0f, 1.0f);glTexCoord2f(0.0f, 1.0f);  glVertex3f( size_,  size_,  size_);
+//                //left
 
+//                     glNormal3f( -1.0f, -1.0f, -1.0f);glTexCoord2f(0.0f, 0.0f); glVertex3f(-size_, -size_, -size_);
+//                     glNormal3f( -1.0f, -1.0f, 1.0f);glTexCoord2f(1.0f, 0.0f); glVertex3f( -size_, -size_,  size_);
+//                     glNormal3f( -1.0f, 1.0f, 1.0f);glTexCoord2f(1.0f, 1.0f); glVertex3f( -size_,  size_,  size_);
+//                     glNormal3f( -1.0f, 1.0f, -1.0f);glTexCoord2f(0.0f, 1.0f);  glVertex3f( -size_,  size_,  -size_);
+//                    //back
 
-                glNormal3f( -1.0f, -1.0f, 1.0f);glTexCoord2f(0.0f, 0.0f); glVertex3f(-size_, -size_,  size_);
-                glNormal3f( 1.0f, -1.0f, 1.0f);glTexCoord2f(1.0f, 0.0f); glVertex3f( size_, -size_,  size_);
-                glNormal3f( 1.0f, 1.0f, 1.0f);glTexCoord2f(1.0f, 1.0f); glVertex3f( size_,  size_,  size_);
-                glNormal3f( -1.0f, 1.0f, 1.0f);glTexCoord2f(0.0f, 1.0f);  glVertex3f( -size_,  size_,  size_);
-             //top
+//                     glNormal3f( 1.0f, -1.0f, -1.0f);glTexCoord2f(0.0f, 0.0f); glVertex3f(size_, -size_,  -size_);
+//                     glNormal3f( -1.0f, -1.0f, -1.0f);glTexCoord2f(1.0f, 0.0f); glVertex3f( -size_, -size_,  -size_);
+//                     glNormal3f( -1.0f, 1.0f, -1.0f);glTexCoord2f(1.0f, 1.0f); glVertex3f( -size_,  size_,  -size_);
+//                     glNormal3f( 1.0f, 1.0f, -1.0f);glTexCoord2f(0.0f, 1.0f);  glVertex3f( size_,  size_,  -size_);
+//                 //buttom
 
-                 glNormal3f( -1.0f, 1.0f, 1.0f);glTexCoord2f(0.0f, 0.0f); glVertex3f(-size_, size_,  size_);
-                 glNormal3f( 1.0f, 1.0f, 1.0f);glTexCoord2f(1.0f, 0.0f); glVertex3f( size_, size_,  size_);
-                 glNormal3f( 1.0f, 1.0f, -1.0f);glTexCoord2f(1.0f, 1.0f); glVertex3f( size_,  size_,  -size_);
-                 glNormal3f( -1.0f, 1.0f, -1.0f);glTexCoord2f(0.0f, 1.0f);  glVertex3f( -size_,  size_,  -size_);
-             //right
-
-                   glNormal3f( 1.0f, -1.0f, 1.0f);glTexCoord2f(0.0f, 0.0f); glVertex3f(size_, -size_,  size_);
-                   glNormal3f( 1.0f, -1.0f, -1.0f);glTexCoord2f(1.0f, 0.0f); glVertex3f( size_, -size_,  -size_);
-                   glNormal3f( 1.0f, 1.0f, -1.0f);glTexCoord2f(1.0f, 1.0f); glVertex3f( size_,  size_,  -size_);
-                   glNormal3f( 1.0f, 1.0f, 1.0f);glTexCoord2f(0.0f, 1.0f);  glVertex3f( size_,  size_,  size_);
-                //left
-
-                     glNormal3f( -1.0f, -1.0f, -1.0f);glTexCoord2f(0.0f, 0.0f); glVertex3f(-size_, -size_, -size_);
-                     glNormal3f( -1.0f, -1.0f, 1.0f);glTexCoord2f(1.0f, 0.0f); glVertex3f( -size_, -size_,  size_);
-                     glNormal3f( -1.0f, 1.0f, 1.0f);glTexCoord2f(1.0f, 1.0f); glVertex3f( -size_,  size_,  size_);
-                     glNormal3f( -1.0f, 1.0f, -1.0f);glTexCoord2f(0.0f, 1.0f);  glVertex3f( -size_,  size_,  -size_);
-                    //back
-
-                     glNormal3f( 1.0f, -1.0f, -1.0f);glTexCoord2f(0.0f, 0.0f); glVertex3f(size_, -size_,  -size_);
-                     glNormal3f( -1.0f, -1.0f, -1.0f);glTexCoord2f(1.0f, 0.0f); glVertex3f( -size_, -size_,  -size_);
-                     glNormal3f( -1.0f, 1.0f, -1.0f);glTexCoord2f(1.0f, 1.0f); glVertex3f( -size_,  size_,  -size_);
-                     glNormal3f( 1.0f, 1.0f, -1.0f);glTexCoord2f(0.0f, 1.0f);  glVertex3f( size_,  size_,  -size_);
-                 //buttom
-
-                     glNormal3f( -1.0f, -1.0f, -1.0f);glTexCoord2f(0.0f, 0.0f); glVertex3f(-size_, -size_,  -size_);
-                     glNormal3f( 1.0f, -1.0f, -1.0f);glTexCoord2f(1.0f, 0.0f); glVertex3f( size_, -size_,  -size_);
-                     glNormal3f( 1.0f, -1.0f, 1.0f);glTexCoord2f(1.0f, 1.0f); glVertex3f( size_,  -size_,  size_);
-                     glNormal3f( -1.0f, -1.0f, 1.0f);glTexCoord2f(0.0f, 1.0f);  glVertex3f( -size_, -size_,  size_);
-                 //back
+//                     glNormal3f( -1.0f, -1.0f, -1.0f);glTexCoord2f(0.0f, 0.0f); glVertex3f(-size_, -size_,  -size_);
+//                     glNormal3f( 1.0f, -1.0f, -1.0f);glTexCoord2f(1.0f, 0.0f); glVertex3f( size_, -size_,  -size_);
+//                     glNormal3f( 1.0f, -1.0f, 1.0f);glTexCoord2f(1.0f, 1.0f); glVertex3f( size_,  -size_,  size_);
+//                     glNormal3f( -1.0f, -1.0f, 1.0f);glTexCoord2f(0.0f, 1.0f);  glVertex3f( -size_, -size_,  size_);
+//                 //back
 
 
-              glEnd();
-     glEndList();
+//              glEnd();
+//     glEndList();
 
 
-     auto But_left = glm::vec3(-size_-50,-size_-50,size_+50);
-     auto But_right = glm::vec3(size_+50,-size_-50,size_+50);
-     auto Top_right = glm::vec3(size_+50,  size_+50,  size_+50);
-     auto Top_left = glm::vec3( -size_-50,  size_+50,  size_+50);
+//     auto But_left = glm::vec3(-size_-50,-size_-50,size_+50);
+//     auto But_right = glm::vec3(size_+50,-size_-50,size_+50);
+//     auto Top_right = glm::vec3(size_+50,  size_+50,  size_+50);
+//     auto Top_left = glm::vec3( -size_-50,  size_+50,  size_+50);
 
 
-     auto back_top_right = glm::vec3( size_+50,  size_+50,  -size_-50);
-     auto back_top_left = glm::vec3( -size_-50,  size_+50,  -size_-50);
-     auto back_but_right = glm::vec3( size_+50,  -size_-50,  -size_-50);
-     auto back_but_left = glm::vec3( -size_-50,  -size_-50,  -size_-50);
+//     auto back_top_right = glm::vec3( size_+50,  size_+50,  -size_-50);
+//     auto back_top_left = glm::vec3( -size_-50,  size_+50,  -size_-50);
+//     auto back_but_right = glm::vec3( size_+50,  -size_-50,  -size_-50);
+//     auto back_but_left = glm::vec3( -size_-50,  -size_-50,  -size_-50);
 
-    auto list_id2 = glGenLists(2);
-     glNewList(list_id2,GL_COMPILE);
-         glBegin(GL_LINES);
-           // Near Face
-         //fron
-          glColor3f(1.0f, 1.0f, 1.0f);
+//    auto list_id2 = glGenLists(2);
+//     glNewList(list_id2,GL_COMPILE);
+//         glBegin(GL_LINES);
+//           // Near Face
+//         //fron
+//          glColor3f(1.0f, 1.0f, 1.0f);
 
+//               glVertex3f(-size_,-size_,size_);glVertex3f(But_left.x, But_left.y, But_left.z);
+//               glVertex3f(size_,-size_,size_);glVertex3f(But_right.x,But_right.y,But_right.z);
+//               glVertex3f( size_,  size_,  size_);glVertex3f(Top_right.x,Top_right.y,Top_right.z);
+//               glVertex3f( -size_,  size_,  size_);glVertex3f(Top_left.x,Top_left.y,Top_left.z);
+//               glVertex3f( size_,  size_,  -size_);glVertex3f(back_top_right.x,back_top_right.y,back_top_right.z);
+//               glVertex3f( -size_,  size_,  -size_);glVertex3f(back_top_left.x,back_top_left.y,back_top_left.z);
+//               glVertex3f( size_,  -size_,  -size_);glVertex3f(back_but_right.x,back_but_right.y,back_but_right.z);
+//               glVertex3f( -size_,  -size_,  -size_);glVertex3f(back_but_left.x,back_but_left.y,back_but_left.z);
 
-//          glVertex3f(-size_, -size_,  size_);glVertex3f( -size_, -size_,  size_+100);//butLeft
-//          glVertex3f( size_, -size_,  size_);glVertex3f( size_, -size_,  size_+100);//butright
-//          glVertex3f( size_,  size_,  size_);glVertex3f( size_,  size_,  size_+100);//topright
-//          glVertex3f( -size_,  size_,  size_);glVertex3f( -size_,  size_,  size_+100);//topLeft
-//       //top
-
-//           glVertex3f(-size_, size_,  size_);glVertex3f(-size_, size_+100,  size_);//topLeft
-//           glVertex3f( size_, size_,  size_); glVertex3f( size_, size_+100,  size_);//topright
-//           glVertex3f( size_,  size_,  -size_);glVertex3f( size_,  size_+100,  -size_);//back_top_right
-//           glVertex3f( -size_,  size_,  -size_);glVertex3f( -size_,  size_+100,  -size_);//back_top_left
-//       //right
-
-//              glVertex3f(size_, -size_,  size_);glVertex3f(size_+100, -size_,  size_);//butright
-//             glVertex3f( size_, -size_,  -size_);glVertex3f( size_+100, -size_,  -size_);//back_but_right
-//             glVertex3f( size_,  size_,  -size_); glVertex3f( size_+100,  size_,  -size_);//back_top_right
-//              glVertex3f( size_,  size_,  size_);glVertex3f( size_+100,  size_,  size_);//topright
-//          //left
-//            glVertex3f(-size_, -size_, -size_);glVertex3f(-size_-100, -size_, -size_);//back_but_left
-//                glVertex3f( -size_, -size_,  size_);glVertex3f( -size_-100, -size_,  size_);//butLeft
-//               glVertex3f( -size_,  size_,  size_); glVertex3f( -size_-100,  size_,  size_);//topLeft
-//                 glVertex3f( -size_,  size_,  -size_);glVertex3f( -size_-100,  size_,  -size_);//back_top_left
-//              //back
-
-//               glVertex3f(size_, -size_,  -size_);glVertex3f(size_, -size_,  -size_-100);//back_but_right
-//              glVertex3f( -size_, -size_,  -size_);glVertex3f( -size_, -size_,  -size_-100);//back_but_left
-//                glVertex3f( -size_,  size_,  -size_);glVertex3f( -size_,  size_,  -size_-100);//back_top_left
-//              glVertex3f( size_,  size_,  -size_);glVertex3f( size_,  size_,  -size_-100);//back_top_right
-//           //buttom
-//         glVertex3f(-size_, -size_,  -size_);glVertex3f(-size_, -size_-100,  -size_);//back_but_left
-//              glVertex3f( size_, -size_,  -size_);glVertex3f( size_, -size_-100,  -size_);//back_but_right
-//              glVertex3f( size_,  -size_,  size_);glVertex3f( size_,  -size_-100,  size_);//butright
-//               glVertex3f( -size_, -size_,  size_);glVertex3f( -size_, -size_-100,  size_);//butLeft
-//           //back
-
-
-               glVertex3f(-size_,-size_,size_);glVertex3f(But_left.x, But_left.y, But_left.z);
-               glVertex3f(size_,-size_,size_);glVertex3f(But_right.x,But_right.y,But_right.z);
-               glVertex3f( size_,  size_,  size_);glVertex3f(Top_right.x,Top_right.y,Top_right.z);
-               glVertex3f( -size_,  size_,  size_);glVertex3f(Top_left.x,Top_left.y,Top_left.z);
-               glVertex3f( size_,  size_,  -size_);glVertex3f(back_top_right.x,back_top_right.y,back_top_right.z);
-               glVertex3f( -size_,  size_,  -size_);glVertex3f(back_top_left.x,back_top_left.y,back_top_left.z);
-               glVertex3f( size_,  -size_,  -size_);glVertex3f(back_but_right.x,back_but_right.y,back_but_right.z);
-               glVertex3f( -size_,  -size_,  -size_);glVertex3f(back_but_left.x,back_but_left.y,back_but_left.z);
-
-               glEnd();
-      glEndList();
+//               glEnd();
+//      glEndList();
 
 
 DrawBillboard();
@@ -188,18 +134,38 @@ DrawTexture();
 void Character::privateRender()
 {
 
+    shader.Bind();
+    texture.Bind(texSlot);
+
+
+    shader.SetUniformMat4f("u_MVP",projectionMatrix_ * viewMatrix_* matrix_);
+
+    vb.Bind();
+    va.Bind();
+    ib.Bind();
+    GLCall(glDrawElements(GL_QUADS, ib.GetCount(), GL_UNSIGNED_INT, nullptr));
+
+
+
+
+     shader.Unbind();
+     va.Unbind();
+     ib.Unbind();
+     vb.Unbind();
+     texture.Unbind();
+
 
 
     glEnable(GL_COLOR_MATERIAL);
     glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 
     glEnable(GL_NORMALIZE);
-    glColor3f(0.0f, 1.0f, 0.0f);
+//    glColor3f(0.0f, 1.0f, 0.0f);
 
 
 
 
-              glCallList(1);
+//              glCallList(1);
 
 
 //    glCallList(2);
@@ -208,7 +174,7 @@ void Character::privateRender()
      glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 
-     glBindTexture(GL_TEXTURE_2D,texture);
+     glBindTexture(GL_TEXTURE_2D,texture1);
      glTexCoordPointer(2,GL_FLOAT,0,billboardTexture_.data());
      glColor3f( 1.0f, 1.0f, 1.0f);
 
@@ -264,8 +230,8 @@ void Character::CreateTexture(){
 void Character::DrawTexture(){
 
 
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
+    glGenTextures(1, &texture1);
+    glBindTexture(GL_TEXTURE_2D, texture1);
     // set the texture wrapping/filtering options (on the currently bound texture object)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -299,6 +265,7 @@ void Character::moveDownward()
 }
 void Character::privateUpdate()
 {
+    matrix_ = glm::rotate(matrix_, 0.01f, glm::vec3(0.0f, 1.0f, 0.0f));
 //    matrix_ = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f,0.0f,0.0f)) * glm::rotate(matrix_, 0.01f, glm::vec3(0.0f,1.0f,0.0f)) ;
 
 }
