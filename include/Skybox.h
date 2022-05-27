@@ -101,8 +101,8 @@ private:
         "D:/UIT/VG-3609/start_code/assets/Skybox/skybox_west.bmp",
         "D:/UIT/VG-3609/start_code/assets/Skybox/skybox_up.bmp",
         "D:/UIT/VG-3609/start_code/assets/Skybox/skybox_down.bmp",
-        "D:/UIT/VG-3609/start_code/assets/Skybox/skybox_south.bmp",
-        "D:/UIT/VG-3609/start_code/assets/Skybox/skybox_north.bmp"
+        "D:/UIT/VG-3609/start_code/assets/Skybox/skybox_north.bmp",
+        "D:/UIT/VG-3609/start_code/assets/Skybox/skybox_south.bmp"
     };
     Texture texture = Texture(faces);
 };

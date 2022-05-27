@@ -20,7 +20,6 @@ void Skybox::privateInit(){
     va.AddBuffer(vb,layout);
     shader.initShader("D:/UIT/VG-3609/start_code/include/Skybox.shader");
     shader.Bind();
-    layout.Push<float>(3);
     shader.SetUniform4f("u_Color",0.2f,0.3f,0.8f,1.0f);
 
 

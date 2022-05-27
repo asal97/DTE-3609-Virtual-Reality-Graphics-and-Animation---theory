@@ -54,9 +54,9 @@ void GameManager::privateInit()
   character_.reset(new Character());
   this->addSubObject(character_);
 
-    text_.reset(new Text(
-                    "Hi", {100.0f,100.0f, 50.0f}, GLUT_STROKE_ROMAN, {1.0f, 1.0f, 1.0f} ));
-    this->addSubObject(text_);
+//    text_.reset(new Text(
+//                    "Hi", {100.0f,100.0f, 50.0f}, GLUT_STROKE_ROMAN, {1.0f, 1.0f, 1.0f} ));
+//    this->addSubObject(text_);
 
 //    minimap_.reset(new Minimap());
 //    this->addSubObject(minimap_);
@@ -66,6 +66,9 @@ void GameManager::privateInit()
 
     billboard_.reset(new Billboard());
     this->addSubObject(billboard_);
+
+    monster_.reset(new Monster());
+    this->addSubObject(monster_);
 
 
 

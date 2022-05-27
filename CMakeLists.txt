@@ -44,10 +44,11 @@ set( INCLUDE
         include/VertexArray.h
         include/VertexBufferLayout.h
         include/Shader.h
-
         include/Texture.h
         include/Skybox.h
         include/Billboard.h
+        include/Monster.h
+
 
         include/Basic.shader
         include/Skybox.shader
@@ -72,6 +73,8 @@ set(SRCS
         src/Texture.cpp
         src/Skybox.cpp
         src/Billboard.cpp
+        src/Monster.cpp
+
 	app/main.cpp
 
 

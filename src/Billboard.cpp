@@ -84,6 +84,7 @@ void Billboard::DrawTexture(){
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
     int width, height, nrChannels;
+     stbi_set_flip_vertically_on_load(0);
     unsigned char *data = stbi_load("D:/UIT/VG-3609/start_code/assets/Healthbar.png", &width, &height, &nrChannels, 0);
 
     // load and generate the texture
