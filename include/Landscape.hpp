@@ -17,9 +17,11 @@
 #include "../../glm-master/glm/glm.hpp"
 #include "SceneObject.hpp"
 
+
+
 class Landscape : public SceneObject {
 public:
-  Landscape();
+  Landscape(glm::vec3 translate);
   ~Landscape();
 
 
@@ -29,31 +31,44 @@ protected:
   virtual void privateUpdate();
 
 private:
-  unsigned int indices[12] = {
-              0,1,2,3,
-              4,5,6,7,
-              8,9,10,11
-  };
+  unsigned int PosSize = 5 * 4 * 3;
+  unsigned int indicesSize = 3 * 4;
+
+//  unsigned int indices[3*4] = {
+//              0,1,2,3,
+//              4,5,6,7,
+//              8,9,10,11
+//  };
 
   float size = 50.0f;
 
 
-  float positions[5*4*3] = {
+//  float positions[5*4*3] = {
+//      -2*size, -53.0f, 2*size, 0.0f, 0.0f,
+//      2*size, -53.0f, 2*size, 1.0f, 0.0f,
+//      2*size, -53.0f, -2*size, 1.0f, 1.0f,
+//      -2*size, -53.0f, -2*size, 0.0f, 1.0f,
+
+//      -6*size, -53.0f, 2*size, 0.0f, 0.0f,
+//     -2*size, -53.0f, 2*size, 1.0f, 0.0f,
+//      -2*size, -53.0f, -2*size, 1.0f, 1.0f,
+//      -6*size, -53.0f, -2*size, 0.0f, 1.0f,
+
+//      2*size, -53.0f, 2*size, 0.0f, 0.0f,
+//      6*size, -53.0f, 2*size, 1.0f, 0.0f,
+//      6*size, -53.0f, -2*size, 1.0f, 1.0f,
+//      2*size, -53.0f, -2*size, 0.0f, 1.0f,
+//       };
+
+  unsigned int indices[4] = {
+              0,1,2,3,
+  };
+  float positions[5*4] = {
       -2*size, -53.0f, 2*size, 0.0f, 0.0f,
       2*size, -53.0f, 2*size, 1.0f, 0.0f,
       2*size, -53.0f, -2*size, 1.0f, 1.0f,
       -2*size, -53.0f, -2*size, 0.0f, 1.0f,
-
-      -6*size, -53.0f, 2*size, 0.0f, 0.0f,
-     -2*size, -53.0f, 2*size, 1.0f, 0.0f,
-      -2*size, -53.0f, -2*size, 1.0f, 1.0f,
-      -6*size, -53.0f, -2*size, 0.0f, 1.0f,
-
-      2*size, -53.0f, 2*size, 0.0f, 0.0f,
-      6*size, -53.0f, 2*size, 1.0f, 0.0f,
-      6*size, -53.0f, -2*size, 1.0f, 1.0f,
-      2*size, -53.0f, -2*size, 0.0f, 1.0f,
-       };
+   };
 
   std::vector<glm::vec3>
       vertexArray_;
@@ -61,9 +76,10 @@ private:
 
 
   VertexArray va;
-  VertexBuffer vb = VertexBuffer(positions, 5* 4* 3 * sizeof(float));;
+//  VertexBuffer vb = VertexBuffer(positions, 5* 4* 3 * sizeof(float));;
+  VertexBuffer vb = VertexBuffer(positions, 5*4 * sizeof(float));;
   VertexBufferLayout layout;
-  IndexBuffer ib = IndexBuffer(indices, 12);
+  IndexBuffer ib = IndexBuffer(indices, 4);
   Shader shader;
   Texture texture = Texture("D:/UIT/VG-3609/start_code/assets/road.png");
   Texture texture1 = Texture("D:/UIT/VG-3609/start_code/assets/Tile.jpg");

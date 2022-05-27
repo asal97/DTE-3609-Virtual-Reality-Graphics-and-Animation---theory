@@ -28,7 +28,7 @@ void Skybox::privateInit(){
 //    shader.SetUniform1i("u_Skybox", 0);
     projectionMatrix_ = glm::perspective(glm::radians(60.0f), 900.0f / 700.0f, 1.0f, 3000.0f);
 
-    texture.Unbind();
+    texture.UnbindCubeMap();
     va.Unbind();
     vb.Unbind();
     ib.Unbind();
@@ -55,7 +55,7 @@ void Skybox::privateRender(){
     va.Unbind();
     ib.Unbind();
     vb.Unbind();
-    texture.Unbind();
+    texture.UnbindCubeMap();
 
 
 }

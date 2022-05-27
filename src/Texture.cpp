@@ -77,4 +77,10 @@ void Texture::BindCubeMap() const
 
 void Texture::Unbind() const
 {
+    GLCall(glBindTexture(GL_TEXTURE_2D,0));
+}
+
+void Texture::UnbindCubeMap() const
+{
+    GLCall(glBindTexture(GL_TEXTURE_CUBE_MAP,0));
 }

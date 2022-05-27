@@ -10,7 +10,7 @@ static GLint fogMode;
 
 Character::Character()
 {
-
+    matrix_ = glm::rotate(matrix_,glm::radians(15.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 }
 
 Character::~Character()

@@ -4,10 +4,14 @@
 #include "../../glm-master/glm/gtc/type_ptr.hpp"
 //#include"../include/Basic.shader"
 
-Landscape::Landscape()
+Landscape::Landscape(glm::vec3 translate)
 {
-    auto scale = glm::scale(glm::mat4(1.0f),glm::vec3(5.0f,1.0f,5.0f));
-    matrix_ = scale;
+//    auto scale = glm::scale(glm::mat4(1.0f),glm::vec3(1.0f,1.0f,5.0f));
+//    matrix_ = scale;
+    matrix_ = glm::translate(glm::mat4(1.0f),translate) * glm::rotate(matrix_,glm::radians(15.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+
+
+
 }
 
 Landscape::~Landscape()
@@ -76,5 +80,12 @@ void Landscape::privateRender()
 
 void Landscape::privateUpdate()
 {
+ if(matrix_[3].x<-400){
+     auto translate = glm::translate(glm::mat4(1.0f),glm::vec3(1200.0f,0.0f,0.0f));
+     matrix_ = matrix_ * translate;
+ }
+
+ auto translate = glm::translate(glm::mat4(1.0f),glm::vec3(-1.0f,0.0f,0.0f)) ;
+ matrix_ = matrix_ * translate;
 }
 

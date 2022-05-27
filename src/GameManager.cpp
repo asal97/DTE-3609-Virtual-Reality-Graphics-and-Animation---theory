@@ -18,12 +18,11 @@ void GameManager::privateInit()
 //   glEnable(GL_FOG);
 //   GLfloat color[] = {0.5f, 0.5f, 0.5f, 1.0f};
 //   glFogfv(GL_FOG_COLOR, color);
-//   glFogf(GL_FOG_DENSITY, 0.001f);
+//   glFogf(GL_FOG_DENSITY, 0.01f);
 //   glFogi(GL_FOG_MODE, GL_EXP);
 
 
 
-//   glEnable(GL_DEPTH_TEST);
 
 
    glEnable(GL_NORMALIZE);
@@ -37,9 +36,20 @@ void GameManager::privateInit()
 //     this->addSubObject(snow_);
 
 
-
-  ls_.reset(new Landscape());
+  ls_.reset(new Landscape(glm::vec3(-200.0f* cos(glm::radians(15.0f)),-200*sin(glm::radians(15.0f)),0.0f)));
+   this->addSubObject(ls_);
+  ls_.reset(new Landscape(glm::vec3(0.0f,0.0f,0.0f)));
   this->addSubObject(ls_);
+  ls_.reset(new Landscape(glm::vec3(200.0f * cos(glm::radians(15.0f)),200*sin(glm::radians(15.0f)),0.0f)));
+   this->addSubObject(ls_);
+  ls_.reset(new Landscape(glm::vec3(2 * 200.0f * cos(glm::radians(15.0f)),2 * 200*sin(glm::radians(15.0f)),0.0f)));
+  this->addSubObject(ls_);
+  ls_.reset(new Landscape(glm::vec3(3 * 200.0f * cos(glm::radians(15.0f)),3 * 200*sin(glm::radians(15.0f)),0.0f)));
+  this->addSubObject(ls_);
+  ls_.reset(new Landscape(glm::vec3(4 * 200.0f * cos(glm::radians(15.0f)),4 * 200*sin(glm::radians(15.0f)),0.0f)));
+  this->addSubObject(ls_);
+
+
 
   character_.reset(new Character());
   this->addSubObject(character_);
@@ -52,7 +62,7 @@ void GameManager::privateInit()
 //    this->addSubObject(minimap_);
 
     skybox_.reset(new Skybox());
-this->addSubObject(skybox_);
+    this->addSubObject(skybox_);
 
     billboard_.reset(new Billboard());
     this->addSubObject(billboard_);
