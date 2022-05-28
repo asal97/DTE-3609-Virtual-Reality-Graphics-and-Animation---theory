@@ -41,39 +41,39 @@ class Character : public SceneObject
             16,17,18,19,
             20,21,22,23
         };
-        float positions[5*6*4] = {
-           -size_, -size_,  size_, 0.0f, 0.0f,
-            size_, -size_,  size_, 1.0f, 0.0f,
-            size_,  size_,  size_, 1.0f, 1.0f,
-            -size_,  size_,  size_, 0.0f, 1.0f,
+        float positions[8*6*4] = {
+           -size_, -size_,  size_,  -1.0f, -1.0f, 1.0f ,  0.0f, 0.0f,
+            size_, -size_,  size_, 1.0f, -1.0f, 1.0f,     1.0f, 0.0f,
+            size_,  size_,  size_,  1.0f, 1.0f, 1.0f,     1.0f, 1.0f,
+            -size_,  size_,  size_,  -1.0f, 1.0f, 1.0f ,  0.0f, 1.0f,
 
-            -size_, size_,  size_, 0.0f, 0.0f,
-           size_, size_,  size_, 1.0f, 0.0f,
-            size_,  size_,  -size_, 1.0f, 1.0f,
-            -size_,  size_,  -size_, 0.0f, 1.0f,
+            -size_, size_,  size_,  -1.0f, 1.0f, 1.0f,    0.0f, 0.0f,
+           size_, size_,  size_, 1.0f, 1.0f, 1.0f,        1.0f, 0.0f,
+            size_,  size_,  -size_, 1.0f, 1.0f, -1.0f,    1.0f, 1.0f,
+            -size_,  size_,  -size_,-1.0f, 1.0f, -1.0f,   0.0f, 1.0f,
 
-            size_, -size_,  size_, 0.0f, 0.0f,
-            size_, -size_,  -size_, 1.0f, 0.0f,
-            size_,  size_,  -size_, 1.0f, 1.0f,
-             size_,  size_,  size_, 0.0f, 1.0f,
+            size_, -size_,  size_, 1.0f, -1.0f, 1.0f,     0.0f, 0.0f,
+            size_, -size_,  -size_, 1.0f, -1.0f, -1.0f,   1.0f, 0.0f,
+            size_,  size_,  -size_,1.0f, 1.0f, -1.0f,     1.0f, 1.0f,
+             size_,  size_,  size_, 1.0f, 1.0f, 1.0f,     0.0f, 1.0f,
 
-            -size_, -size_, -size_, 0.0f, 0.0f,
-             -size_, -size_,  size_, 1.0f, 0.0f,
-             -size_,  size_,  size_, 1.0f, 1.0f,
-               -size_,  size_,  -size_, 0.0f, 1.0f,
+            -size_, -size_, -size_,-1.0f, -1.0f, -1.0f,     0.0f, 0.0f,
+             -size_, -size_,  size_, -1.0f, -1.0f, 1.0f,    1.0f, 0.0f,
+             -size_,  size_,  size_, -1.0f, 1.0f, 1.0f,     1.0f, 1.0f,
+               -size_,  size_,  -size_, -1.0f, 1.0f, -1.0f, 0.0f, 1.0f,
 
-            size_, -size_,  -size_, 0.0f, 0.0f,
-            -size_, -size_,  -size_, 1.0f, 0.0f,
-             -size_,  size_,  -size_, 1.0f, 1.0f,
-             size_,  size_,  -size_, 0.0f, 1.0f,
+            size_, -size_,  -size_,1.0f, -1.0f, -1.0f,    0.0f, 0.0f,
+            -size_, -size_,  -size_,-1.0f, -1.0f, -1.0f,  1.0f, 0.0f,
+             -size_,  size_,  -size_,-1.0f, 1.0f, -1.0f,  1.0f, 1.0f,
+             size_,  size_,  -size_,1.0f, 1.0f, -1.0f,    0.0f, 1.0f,
 
-             -size_, -size_,  -size_, 0.0f, 0.0f,
-             size_, -size_,  -size_, 1.0f, 0.0f,
-            size_,  -size_,  size_, 1.0f, 1.0f,
-              -size_, -size_,  size_, 0.0f, 1.0f,
+             -size_, -size_,  -size_,-1.0f, -1.0f, -1.0f,  0.0f, 0.0f,
+             size_, -size_,  -size_,1.0f, -1.0f, -1.0f,    1.0f, 0.0f,
+            size_,  -size_,  size_, 1.0f, -1.0f, 1.0f,     1.0f, 1.0f,
+              -size_, -size_,  size_, -1.0f, -1.0f, 1.0f,  0.0f, 1.0f,
              };
         VertexArray va;
-        VertexBuffer vb = VertexBuffer(positions, 5* 6* 4 * sizeof(float));;
+        VertexBuffer vb = VertexBuffer(positions, 8* 6* 4 * sizeof(float));;
         VertexBufferLayout layout;
         IndexBuffer ib = IndexBuffer(indices, 24);
         Shader shader;

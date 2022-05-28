@@ -53,6 +53,7 @@ set( INCLUDE
         include/Basic.shader
         include/Skybox.shader
         include/Landscape.shader
+        include/Character.shader
 
 )
 set(SRCS

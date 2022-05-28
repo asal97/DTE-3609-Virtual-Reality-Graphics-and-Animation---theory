@@ -10,6 +10,7 @@ static GLint fogMode;
 
 Character::Character()
 {
+    projectionMatrix_ = glm::perspective(glm::radians(60.0f), 900.0f / 700.0f, 1.0f, 30000.0f);
     matrix_ = glm::rotate(matrix_,glm::radians(15.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 }
 
@@ -23,17 +24,17 @@ void Character::privateInit()
 
     VertexBufferLayout layout;
     layout.Push<float>(3);
+    layout.Push<float>(3);
     layout.Push<float>(2);
     va.AddBuffer(vb,layout);
-    shader.initShader("D:/UIT/VG-3609/start_code/include/Basic.shader");
+    shader.initShader("D:/UIT/VG-3609/start_code/include/Character.shader");
     shader.Bind();
-    shader.SetUniform4f("u_Color",0.2f,0.3f,0.8f,1.0f);
-
+//    shader.SetUniform4f("u_Color",0.2f,0.3f,0.8f,1.0f);
 
 
     texture.Bind(texSlot);
     shader.SetUniform1i("u_Texture", texSlot);
-    projectionMatrix_ = glm::perspective(glm::radians(60.0f), 900.0f / 700.0f, 1.0f, 30000.0f);
+
 
     texture.Unbind();
     va.Unbind();
@@ -135,7 +136,11 @@ void Character::privateRender()
     texture.Bind(texSlot);
 
 
-    shader.SetUniformMat4f("u_MVP",projectionMatrix_ * viewMatrix_* matrix_);
+    shader.SetUniformMat4f("model",matrix_);
+    shader.SetUniformMat4f("view",viewMatrix_);
+    shader.SetUniformMat4f("projection",projectionMatrix_);
+    shader.SetUniform4f("lightPos",100.0f,200.0f,300.0f,0.0);
+//    shader.SetUniformMat4f("u_MVP",projectionMatrix_ * viewMatrix_* matrix_);
 
     vb.Bind();
     va.Bind();
