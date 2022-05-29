@@ -19,11 +19,13 @@
 
 class Character : public SceneObject
 {
-	public:
+public:
         Character();
         ~Character();
          void moveUpward();
          void moveDownward();
+         float getSize(){return size_;}
+         glm::vec3 getPos(){return glm::vec3(matrix_[3].x,matrix_[3].y,matrix_[3].z);}
 
   protected:
     void privateInit();

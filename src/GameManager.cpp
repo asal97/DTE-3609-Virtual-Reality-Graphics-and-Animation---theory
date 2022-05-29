@@ -81,10 +81,29 @@ void GameManager::privateRender()
 
 void GameManager::privateUpdate()
 {
+  CollisionDetection();
   // Instead of adding alle objects in the scene as subobject to the camera they are added as subobjects
   // to the game manager. Therefore, we set the game manager matrix equal to the camera matrix. 
   this->matrix_ = cam_->getMatrix();
 
+}
+void GameManager::CollisionDetection(){
+    glm::vec3 charPos = character_->getPos();
+    float charSize = character_->getSize();
+    glm::vec3 monsterPos = monster_->getPos();
+    float monsterSize = monster_->getSize();
+
+//    std::cout << "monster x "<<monsterPos.x <<" monster y " << monsterPos.y<<std::endl;
+//    std::cout << "char x "<<charPos.x <<" char y " << charPos.y<<std::endl;
+
+    bool colX = (charPos.x - charSize) <= (monsterPos.x + monsterSize) && (charPos.x + charSize) >= (monsterPos.x - monsterSize);
+    bool colY = (charPos.y - charSize) <= (monsterPos.y + monsterSize) && (charPos.y + charSize) >= (monsterPos.y - monsterSize);
+    bool colZ = (charPos.z - charSize) <= (monsterPos.z + monsterSize) && (charPos.z + charSize) >= (monsterPos.z - monsterSize);
+
+    if(colX && colY &&  colZ){
+        std::cout<<"collision detected"<<std::endl;
+        return;
+    }
 }
 
 std::shared_ptr<Camera> GameManager::getCam()

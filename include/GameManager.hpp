@@ -31,6 +31,7 @@ class GameManager : public SceneObject
     virtual void privateInit();
 		virtual void privateRender();
 		virtual void privateUpdate();
+    void CollisionDetection();
 
 	private:
     std::shared_ptr<Landscape> ls_;

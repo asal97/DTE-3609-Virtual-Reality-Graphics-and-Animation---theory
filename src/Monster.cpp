@@ -2,7 +2,8 @@
 
 Monster::Monster()
 {
- matrix_ = glm::rotate(matrix_,glm::radians(15.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+ float pos = 400.0f;
+ matrix_ = glm::translate(glm::mat4(1.0f),glm::vec3(pos,tan(glm::radians(15.0f))*pos,100.0f)) * glm::rotate(matrix_,glm::radians(15.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 }
 Monster::~Monster(){
 

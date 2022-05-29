@@ -23,10 +23,14 @@ class Monster : public SceneObject
 public:
     Monster();
     ~Monster();
+    float getSize(){return size;}
+    glm::vec3 getPos(){return glm::vec3(matrix_[3].x,matrix_[3].y,matrix_[3].z);}
+
 protected:
   virtual void privateInit();
   virtual void privateRender();
   virtual void privateUpdate();
+
 
 private:
     float size = 50.0f;
@@ -34,10 +38,10 @@ private:
                 0,1,2,3,
     };
     float positions[5*4] = {
-        4*size , -size, size, 0.0f, 0.0f,
-        7*size, -size, size, 1.0f, 0.0f,
-        7*size ,2*size, size, 1.0f, 1.0f,
-        4*size,2*size, size, 0.0f, 1.0f,
+        -size,-size, size, 0.0f, 0.0f,
+        size , -size, size, 1.0f, 0.0f,
+        size, size, size, 1.0f, 1.0f,
+        -size ,size, size, 0.0f, 1.0f,
      };
     VertexArray va;
     VertexBuffer vb = VertexBuffer(positions, 5*4 * sizeof(float));

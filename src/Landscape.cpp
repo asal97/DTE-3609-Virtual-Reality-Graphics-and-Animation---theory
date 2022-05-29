@@ -66,7 +66,8 @@ void Landscape::privateRender()
        shader.SetUniformMat4f("model",matrix_);
        shader.SetUniformMat4f("view",viewMatrix_);
        shader.SetUniformMat4f("projection",projectionMatrix_);
-       shader.SetUniform4f("lightPos",1.0f,1.0f,2.0f,0.0);
+       shader.SetUniform4f("lightPos",1.0f,1.0f,2.0f,1.0);
+       shader.SetUniform3f("camera",viewMatrix_[3].x,viewMatrix_[3].y,viewMatrix_[3].z);
 
 
        vb.Bind();

@@ -27,7 +27,7 @@ void main()
         gl_Position = projection * view * model * position;
         Normal = aNormal;
         v_TexCoord = texCoord;
-        LightPos = vec3(view * vec4(vec3(lightPos), 1.0));
+        LightPos = vec3(view * lightPos);
         FragPos = vec3(view * model * position);
 };
 
@@ -42,6 +42,7 @@ in vec2 v_TexCoord;
 uniform sampler2D u_Texture;
 uniform sampler2D u_Texture2;
 uniform sampler2D material_diffuse;
+uniform vec3 camera;
 
 in vec3 FragPos;
 in vec3 LightPos;
@@ -65,7 +66,7 @@ void main()
        vec3 diffuse = light_diffuse * diff * texture(material_diffuse, v_TexCoord).rgb;
 
        // specular
-       vec3 viewDir = normalize( - FragPos);
+       vec3 viewDir = normalize(camera - FragPos);
        vec3 reflectDir = reflect(-lightDir, norm);
        float spec = pow(max(dot(viewDir, reflectDir), 0.0), 64.0f);
        vec3 material_specular = vec3(0.5f,0.5f,0.5f);
@@ -73,7 +74,7 @@ void main()
        vec3 specular = light_specular * (spec * material_specular);
 
        vec3 result = ambient + diffuse + specular;
-//       FragColor = vec4(result, 1.0);
+
 
 
        ////////material light
@@ -90,7 +91,7 @@ void main()
 //        vec3 diffuse = lightColor * (diff * material_diffuse);
 
 ////        // specular
-//        vec3 viewDir = normalize(- FragPos);
+//        vec3 viewDir = normalize(camera- FragPos);
 //        vec3 reflectDir = reflect(-lightDir, norm);
 //        float spec = pow(max(dot(viewDir, reflectDir), 0.0),32.0f);
 //        vec3 material_specular = vec3(0.5f, 0.5f, 0.5f);
@@ -101,7 +102,7 @@ void main()
 
 
 
-        //normal light
+//        normal light
 //        color = vec4(result, 1.0);
 
 //       vec3 lightColor = vec3(1.0f, 1.0f, 1.0f);
@@ -124,7 +125,7 @@ void main()
 
 //       vec3 result = (ambient + diffuse + specular);
 
-       color = mix(texColor, vec4(result, 1.0), 0.5);
+       color = mix(texColor, vec4(result, 1.0), 0.7);
 };
 
 
