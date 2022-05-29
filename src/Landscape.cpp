@@ -2,6 +2,7 @@
 #include "../../glm-master/glm/gtc/matrix_transform.hpp"
 #include "../../glm-master/glm/glm.hpp"
 #include "../../glm-master/glm/gtc/type_ptr.hpp"
+#include "../include/Camera.hpp"
 //#include"../include/Basic.shader"
 
 Landscape::Landscape(glm::vec3 translate)
@@ -10,7 +11,7 @@ Landscape::Landscape(glm::vec3 translate)
 //    matrix_ = scale;
     matrix_ = glm::translate(glm::mat4(1.0f),translate) * glm::rotate(matrix_,glm::radians(15.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 
-
+    projectionMatrix_ = glm::perspective(glm::radians(60.0f), 900.0f / 700.0f, 1.0f, 30000.0f);
 
 }
 
@@ -26,6 +27,7 @@ void Landscape::privateInit()
 
     VertexBufferLayout layout;
     layout.Push<float>(3);
+    layout.Push<float>(3);
     layout.Push<float>(2);
     va.AddBuffer(vb,layout);
     shader.initShader("D:/UIT/VG-3609/start_code/include/Landscape.shader");
@@ -38,7 +40,9 @@ void Landscape::privateInit()
     shader.SetUniform1i("u_Texture", texSlot);
     texture1.Bind(texSlot + 1);
     shader.SetUniform1i("u_Texture2", texSlot + 1);
-    projectionMatrix_ = glm::perspective(glm::radians(60.0f), 900.0f / 700.0f, 1.0f, 30000.0f);
+
+
+
 
     texture.Unbind();
     texture1.Unbind();
@@ -58,7 +62,11 @@ void Landscape::privateRender()
        texture1.Bind(texSlot + 1);
 
 
-       shader.SetUniformMat4f("u_MVP",projectionMatrix_ * viewMatrix_* matrix_);
+       shader.SetUniformMat4f("model",matrix_);
+       shader.SetUniformMat4f("view",viewMatrix_);
+       shader.SetUniformMat4f("projection",projectionMatrix_);
+       shader.SetUniform4f("lightPos",1.0f,1.0f,2.0f,0.0);
+
 
        vb.Bind();
        va.Bind();

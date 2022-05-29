@@ -38,11 +38,11 @@ private:
   unsigned int indices[4] = {
               0,1,2,3,
   };
-  float positions[5*4] = {
-      -2*size, -53.0f, 2*size, 0.0f, 0.0f,
-      2*size, -53.0f, 2*size, 1.0f, 0.0f,
-      2*size, -53.0f, -2*size, 1.0f, 1.0f,
-      -2*size, -53.0f, -2*size, 0.0f, 1.0f,
+  float positions[8*4] = {
+      -2*size, -53.0f, 2*size,0.0f,1.0f,0.0f, 0.0f, 0.0f,
+      2*size, -53.0f, 2*size,0.0f,1.0f,0.0f,  1.0f, 0.0f,
+      2*size, -53.0f, -2*size,0.0f,1.0f,0.0f,  1.0f, 1.0f,
+      -2*size, -53.0f, -2*size, 0.0f,1.0f,0.0f, 0.0f, 1.0f,
    };
 
   std::vector<glm::vec3>
@@ -51,7 +51,7 @@ private:
 
 
   VertexArray va;
-  VertexBuffer vb = VertexBuffer(positions, 5*4 * sizeof(float));
+  VertexBuffer vb = VertexBuffer(positions, 8*4 * sizeof(float));
   VertexBufferLayout layout;
   IndexBuffer ib = IndexBuffer(indices, 4);
   Shader shader;
