@@ -40,6 +40,7 @@ void Landscape::privateInit()
     shader.SetUniform1i("u_Texture", texSlot);
     texture1.Bind(texSlot + 1);
     shader.SetUniform1i("u_Texture2", texSlot + 1);
+    shader.SetUniform1i("material_diffuse",0);
 
 
 
