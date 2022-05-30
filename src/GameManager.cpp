@@ -54,9 +54,9 @@ void GameManager::privateInit()
   character_.reset(new Character());
   this->addSubObject(character_);
 
-//    text_.reset(new Text(
-//                    "Hi", {100.0f,100.0f, 50.0f}, GLUT_STROKE_ROMAN, {1.0f, 1.0f, 1.0f} ));
-//    this->addSubObject(text_);
+    text_.reset(new Text(
+                    "Score", {100.0f,100.0f, 50.0f}, GLUT_BITMAP_TIMES_ROMAN_24, {0.0f, 1.0f, 0.0f} ));
+    this->addSubObject(text_);
 
 //    minimap_.reset(new Minimap());
 //    this->addSubObject(minimap_);
@@ -101,7 +101,9 @@ void GameManager::CollisionDetection(){
     bool colZ = (charPos.z - charSize) <= (monsterPos.z + monsterSize) && (charPos.z + charSize) >= (monsterPos.z - monsterSize);
 
     if(colX && colY &&  colZ){
-        std::cout<<"collision detected"<<std::endl;
+        character_->state_ = state::collided;
+        text_->state_ = Textstate::Tcollided;
+        std::cout<<character_->state_<<std::endl;
         return;
     }
 }

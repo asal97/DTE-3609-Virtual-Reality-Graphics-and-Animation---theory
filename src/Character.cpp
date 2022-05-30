@@ -217,8 +217,6 @@ void Character::moveUpward()
         state_ = state::jump;
         velocity_.y = 1.7f;
     }
-//    auto translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-//    matrix_ *= translate;
 }
 void Character::moveDownward()
 {

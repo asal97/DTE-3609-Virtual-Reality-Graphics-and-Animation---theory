@@ -3,7 +3,7 @@
 Monster::Monster()
 {
  float pos = 400.0f;
- matrix_ = glm::translate(glm::mat4(1.0f),glm::vec3(pos,tan(glm::radians(15.0f))*pos,100.0f)) * glm::rotate(matrix_,glm::radians(15.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+ matrix_ = glm::translate(glm::mat4(1.0f),glm::vec3(pos,tan(glm::radians(15.0f))*pos,0.0f)) * glm::rotate(matrix_,glm::radians(15.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 }
 Monster::~Monster(){
 
@@ -58,7 +58,6 @@ void Monster::privateUpdate(){
         auto translate = glm::translate(glm::mat4(1.0f),glm::vec3(800.0f,0.0f,0.0f));
         matrix_ = matrix_ * translate;
     }
-
     auto translate = glm::translate(glm::mat4(1.0f),glm::vec3(-2.0f,0.0f,0.0f)) ;
     matrix_ = matrix_ * translate;
 }

@@ -11,11 +11,15 @@
 
 using P3 = glm::vec3;
 using ColourVec = glm::vec3;
-//using M4 = glm::mat4;
+
 
 //Types
 int const STROKECHAR = 0;
 
+enum Textstate{
+    Tnormal,
+    Tcollided
+};
 class Text : public SceneObject{
 public:
     Text(char* string, P3 pos, void* font, ColourVec colour);
@@ -25,11 +29,14 @@ public:
     void privateInit();
     void privateRender();
     void privateUpdate();
+    int state_ = Textstate::Tnormal;
+
 
 private:
+    int score = 0;
     P3 pos_;
     void *font_;
-    char *string_;
+    std::string string_;
     int stringLength_;
     ColourVec colour_;
 

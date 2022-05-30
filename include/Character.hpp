@@ -20,7 +20,7 @@
 enum state{
     jump,
     normal,
-    collided,
+    collided
 };
 
 class Character : public SceneObject
@@ -32,7 +32,7 @@ public:
          void moveDownward();
          float getSize(){return size_;}
          glm::vec3 getPos(){return glm::vec3(matrix_[3].x,matrix_[3].y,matrix_[3].z);}
-
+         int state_ = state::normal;
 
 
   protected:
@@ -42,7 +42,7 @@ public:
 
 
 	private:
-        int state_ = state::normal;
+
         float size_ = 50.0f;
         unsigned int indices[24] = {
             0,1,2,3,

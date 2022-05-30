@@ -2,22 +2,39 @@
 #include "../include/GameManager.hpp"
 #include "../include/Text.h"
 
+
+
 Text::Text(char* string, P3 pos, void* font, ColourVec colour)
-    : string_(string), pos_(pos), font_(font), colour_(colour) {}
+    : string_(string), pos_(pos), font_(font), colour_(colour) {
+}
 
 
 void Text::strokeCharacter(){
-    glPushMatrix();
-    glTranslatef(pos_.x, pos_.y, pos_.z);
 
-    glLineWidth(5.0f);
+    glMatrixMode(GL_PROJECTION);
+        glPushMatrix();
+        glLoadIdentity();
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
+        glLoadIdentity();
 
-    for(char *c = string_ ; *c != '\0' ; c++){
-        glutStrokeCharacter(font_, *c);
-    }
+        matrix_ = glm::scale(glm::mat4(1.0f),glm::vec3(1.0f,1.0f,5.0f));
 
-    glLineWidth(1.0f);
-    glPopMatrix();
+        glRasterPos3f(-0.9f, -0.9f, 0.0f);
+
+        glLineWidth(100.0f);
+
+        for (char& c : string_) {
+            glutBitmapCharacter(font_, c);
+        }
+
+        glMatrixMode(GL_PROJECTION);
+        glPopMatrix();
+        glMatrixMode(GL_MODELVIEW);
+        glPopMatrix();
+
+        glLineWidth(1.0f);
+
 
 }
 
@@ -35,5 +52,8 @@ void Text::privateRender(){
     glDisable(GL_COLOR_MATERIAL);
 }
 void Text::privateUpdate(){
-
+    if (state_ == Textstate::Tnormal){
+        score +=1;
+        string_ = std::to_string(score);
+    }
 }
