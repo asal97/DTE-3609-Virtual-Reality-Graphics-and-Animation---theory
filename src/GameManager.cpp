@@ -102,15 +102,23 @@ void GameManager::CollisionDetection(){
     bool colZ = (charPos.z - charSize) <= (monsterPos.z + monsterSize) && (charPos.z + charSize) >= (monsterPos.z - monsterSize);
 
     if(colX && colY &&  colZ){
-        if(character_->state_ != state::collided){
-            character_->state_ = state::collided;
-            text_->state_ = Textstate::Tcollided;
-            ls_->state_ = Lstate::Lcollided;
-            billboard_->draw = true;
-            std::cout<<character_->state_<<std::endl;
+        if(character_->colState_ != state::collided){
+            character_->colState_ = state::collided;
+            if(text_->health != 0){
+                text_->health -= 1;
+            }
+            else
+            {
+                text_->state_ = Textstate::Tcollided;
+                billboard_->draw = true;
+            }
+            std::cout<<character_->colState_<<std::endl;
         }
         return;
     }
+    character_->colState_ = state::notColided;
+
+
 }
 
 std::shared_ptr<Camera> GameManager::getCam()

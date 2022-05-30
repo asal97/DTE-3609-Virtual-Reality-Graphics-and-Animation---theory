@@ -18,9 +18,12 @@
 #include "../../glm-master/glm/gtc/type_ptr.hpp"
 
 enum state{
-    jump,
-    normal,
+    notColided,
     collided
+};
+enum Jstate{
+    jump,
+    notJump
 };
 
 class Character : public SceneObject
@@ -29,11 +32,10 @@ public:
         Character();
         ~Character();
          void moveUpward();
-         void moveDownward();
          float getSize(){return size_;}
          glm::vec3 getPos(){return glm::vec3(matrix_[3].x,matrix_[3].y,matrix_[3].z);}
-         int state_ = state::normal;
-
+         int colState_ = state::notColided;
+         int jumpState_ = Jstate::notJump;
 
   protected:
     void privateInit();

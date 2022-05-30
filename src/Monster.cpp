@@ -60,6 +60,6 @@ void Monster::privateUpdate(){
         matrix_ = matrix_ * translate;
     }
     int speedScale = (score/300) + 1;
-    auto translate = glm::translate(glm::mat4(1.0f),glm::vec3(speed *speedScale ,0.0f,0.0f)) ;
+    auto translate = glm::translate(glm::mat4(1.0f),glm::vec3(speed - (speedScale*0.5f) ,0.0f,0.0f)) ;
     matrix_ = matrix_ * translate;
 }

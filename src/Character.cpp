@@ -212,24 +212,19 @@ void Character::privateRender()
 void Character::moveUpward()
 {
 
-    if(state_ == state::normal)
+    if(colState_ == state::notColided && jumpState_ == Jstate::notJump)
     {
-        state_ = state::jump;
+        jumpState_ = Jstate::jump;
         velocity_.y = 1.9f;
     }
 }
-void Character::moveDownward()
-{
-      auto translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -1.0f, 0.0f));
-      matrix_ *= translate;
-}
 void Character::privateUpdate()
 {
-    if(state_ == state::jump)
+    if(jumpState_ == Jstate::jump)
     {
         if(count>=1&& position_.y >= getPos().y)
         {
-            state_ = state::normal;
+            jumpState_ = Jstate::notJump;
             count =0;
         }
         else{
@@ -242,8 +237,6 @@ void Character::privateUpdate()
     }
 
     matrix_ = glm::rotate(matrix_, 0.007f, glm::vec3(0.0f, 1.0f, 0.0f));
-
-
 
 }
 

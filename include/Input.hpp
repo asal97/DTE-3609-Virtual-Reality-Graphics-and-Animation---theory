@@ -9,6 +9,6 @@ const int KEY_ID_C        = 5;
 const int KEY_ID_G   = 6;
 const int KEY_ID_H        = 7;
 const int KEY_ID_UP =8;
-const int KEY_ID_DOWN = 9;
+
 
 const int MOUSE_LEFT_BUTTON_DOWN = 20;

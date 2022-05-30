@@ -54,6 +54,6 @@ void Text::privateRender(){
 void Text::privateUpdate(){
     if (state_ == Textstate::Tnormal){
         score +=1;
-        string_ = std::to_string(score);
+        string_ = "Score : "+ std::to_string(score) + "               " + "Level : " + std::to_string(((score/300)+1)) + "               Health : " + std::to_string(health);
     }
 }

@@ -30,15 +30,15 @@ public:
     void privateRender();
     void privateUpdate();
     int state_ = Textstate::Tnormal;
+      int health = 3;
 
 
 private:
     int score = 0;
+
     P3 pos_;
     void *font_;
     std::string string_;
     int stringLength_;
     ColourVec colour_;
-
-
 };

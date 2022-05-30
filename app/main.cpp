@@ -87,8 +87,6 @@ void display() {
     gm->getCam()->rotateRight();
   if (keyPressed[KEY_ID_UP] == true)
     gm->getCharacter()->moveUpward();
-  if (keyPressed[KEY_ID_DOWN] == true)
-    gm->getCharacter()->moveDownward();
 
   glutSwapBuffers();
   glutPostRedisplay();
@@ -130,11 +128,8 @@ void keyDown(unsigned char key, int x, int y) {
   case 'h':
     keyPressed[KEY_ID_H] = true;
     break;
-  case 'o':
+  case 'j':
     keyPressed[KEY_ID_UP] = true;
-    break;
-  case 'p':
-    keyPressed[KEY_ID_DOWN] = true;
     break;
   default:
     glutPostRedisplay();
@@ -167,11 +162,8 @@ void keyUp(unsigned char key, int x, int y) {
   case 'h':
     keyPressed[KEY_ID_H] = false;
     break;
-  case 'o':
+  case 'j':
     keyPressed[KEY_ID_UP] = false;
-    break;
-  case 'p':
-    keyPressed[KEY_ID_DOWN] = false;
     break;
   }
 }
