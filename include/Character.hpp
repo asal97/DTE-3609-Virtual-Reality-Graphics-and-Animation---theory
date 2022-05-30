@@ -17,6 +17,12 @@
 #include "../../glm-master/glm/glm.hpp"
 #include "../../glm-master/glm/gtc/type_ptr.hpp"
 
+enum state{
+    jump,
+    normal,
+    collided,
+};
+
 class Character : public SceneObject
 {
 public:
@@ -27,6 +33,8 @@ public:
          float getSize(){return size_;}
          glm::vec3 getPos(){return glm::vec3(matrix_[3].x,matrix_[3].y,matrix_[3].z);}
 
+
+
   protected:
     void privateInit();
 		void privateRender();
@@ -34,7 +42,8 @@ public:
 
 
 	private:
-         float size_ = 50.0f;
+        int state_ = state::normal;
+        float size_ = 50.0f;
         unsigned int indices[24] = {
             0,1,2,3,
             4,5,6,7,
@@ -81,9 +90,14 @@ public:
         Shader shader;
         Texture texture = Texture("D:/UIT/VG-3609/start_code/assets/Box.jpg");
         unsigned int texSlot = 0;
-          float speed_;
-          float life_;
-          float armor_;
+        float speed_;
+        float life_;
+        float armor_;
+
+        glm::vec3 gravity_ = glm::vec3(0.0f,-0.01f,0.0f);
+        glm::vec3 velocity_ = glm::vec3(0.0f,0.0f,0.0f);
+        glm::vec3 position_ = getPos();
+        int count =0;
     
 };
 

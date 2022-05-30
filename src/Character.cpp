@@ -131,6 +131,9 @@ void Character::privateInit()
 
 void Character::privateRender()
 {
+//    if(state_ == state::jump){
+//        update
+//    }
 
     shader.Bind();
     texture.Bind(texSlot);
@@ -203,15 +206,19 @@ void Character::privateRender()
 
     glDisable(GL_COLOR_MATERIAL);
 
-
-
 }
 
 
 void Character::moveUpward()
 {
-    auto translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-    matrix_ *= translate;
+
+    if(state_ == state::normal)
+    {
+        state_ = state::jump;
+        velocity_.y = 1.7f;
+    }
+//    auto translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+//    matrix_ *= translate;
 }
 void Character::moveDownward()
 {
@@ -220,8 +227,25 @@ void Character::moveDownward()
 }
 void Character::privateUpdate()
 {
+    if(state_ == state::jump)
+    {
+        if(count>=1&& position_.y >= getPos().y)
+        {
+            state_ = state::normal;
+            count =0;
+        }
+        else{
+        velocity_ = velocity_ +  gravity_;
+        if (velocity_.y !=0.0f){
+            matrix_ = glm::translate(matrix_, velocity_);
+            count += 1;
+        }
+        }
+    }
+
     matrix_ = glm::rotate(matrix_, 0.007f, glm::vec3(0.0f, 1.0f, 0.0f));
-//    matrix_ = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f,0.0f,0.0f)) * glm::rotate(matrix_, 0.01f, glm::vec3(0.0f,1.0f,0.0f)) ;
+
+
 
 }
 
