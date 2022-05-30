@@ -64,13 +64,14 @@ void GameManager::privateInit()
     skybox_.reset(new Skybox());
     this->addSubObject(skybox_);
 
-    billboard_.reset(new Billboard());
-    this->addSubObject(billboard_);
+
 
     monster_.reset(new Monster());
     this->addSubObject(monster_);
 
 
+    billboard_.reset(new Billboard());
+    this->addSubObject(billboard_);
 
 }
 
@@ -101,9 +102,13 @@ void GameManager::CollisionDetection(){
     bool colZ = (charPos.z - charSize) <= (monsterPos.z + monsterSize) && (charPos.z + charSize) >= (monsterPos.z - monsterSize);
 
     if(colX && colY &&  colZ){
-        character_->state_ = state::collided;
-        text_->state_ = Textstate::Tcollided;
-        std::cout<<character_->state_<<std::endl;
+        if(character_->state_ != state::collided){
+            character_->state_ = state::collided;
+            text_->state_ = Textstate::Tcollided;
+            ls_->state_ = Lstate::Lcollided;
+            billboard_->draw = true;
+            std::cout<<character_->state_<<std::endl;
+        }
         return;
     }
 }

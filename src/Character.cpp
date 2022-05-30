@@ -215,7 +215,7 @@ void Character::moveUpward()
     if(state_ == state::normal)
     {
         state_ = state::jump;
-        velocity_.y = 1.7f;
+        velocity_.y = 1.9f;
     }
 }
 void Character::moveDownward()

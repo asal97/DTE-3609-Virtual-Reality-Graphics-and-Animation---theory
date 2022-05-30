@@ -16,6 +16,7 @@ class Billboard : public SceneObject
 public:
     Billboard();
     ~Billboard();
+    bool draw = false;
 
 protected:
   void privateInit();

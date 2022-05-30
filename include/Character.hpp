@@ -94,7 +94,7 @@ public:
         float life_;
         float armor_;
 
-        glm::vec3 gravity_ = glm::vec3(0.0f,-0.01f,0.0f);
+        glm::vec3 gravity_ = glm::vec3(0.0f,-0.013f,0.0f);
         glm::vec3 velocity_ = glm::vec3(0.0f,0.0f,0.0f);
         glm::vec3 position_ = getPos();
         int count =0;

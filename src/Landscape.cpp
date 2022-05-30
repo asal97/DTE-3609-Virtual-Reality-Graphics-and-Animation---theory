@@ -90,6 +90,8 @@ void Landscape::privateRender()
 
 void Landscape::privateUpdate()
 {
+
+// if(state_ == Lstate::Lnormal){
  if(matrix_[3].x<-400){
      auto translate = glm::translate(glm::mat4(1.0f),glm::vec3(1200.0f,0.0f,0.0f));
      matrix_ = matrix_ * translate;
@@ -97,5 +99,6 @@ void Landscape::privateUpdate()
 
  auto translate = glm::translate(glm::mat4(1.0f),glm::vec3(-1.0f,0.0f,0.0f)) ;
  matrix_ = matrix_ * translate;
+// }
 }
 

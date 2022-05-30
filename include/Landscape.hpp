@@ -17,12 +17,16 @@
 #include "../../glm-master/glm/glm.hpp"
 #include "SceneObject.hpp"
 
-
+enum Lstate{
+    Lnormal,
+    Lcollided
+};
 
 class Landscape : public SceneObject {
 public:
   Landscape(glm::vec3 translate);
   ~Landscape();
+  int state_ = Lstate::Lnormal;
 
 
 protected:
@@ -58,6 +62,5 @@ private:
   Texture texture = Texture("D:/UIT/VG-3609/start_code/assets/road.png");
   Texture texture1 = Texture("D:/UIT/VG-3609/start_code/assets/Tile.jpg");
   unsigned int texSlot = 0;
-
 
 };

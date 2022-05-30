@@ -50,6 +50,8 @@ private:
     Shader shader;
     Texture texture = Texture("D:/UIT/VG-3609/start_code/assets/monster.png");
     unsigned int texSlot = 0;
+    int score=0;
+    float speed = -2.0f;
 };
 
 

@@ -54,10 +54,12 @@ void Monster::privateRender(){
      glDisable(GL_BLEND);
 }
 void Monster::privateUpdate(){
+    score +=1;
     if(matrix_[3].x<-400){
         auto translate = glm::translate(glm::mat4(1.0f),glm::vec3(800.0f,0.0f,0.0f));
         matrix_ = matrix_ * translate;
     }
-    auto translate = glm::translate(glm::mat4(1.0f),glm::vec3(-2.0f,0.0f,0.0f)) ;
+    int speedScale = (score/300) + 1;
+    auto translate = glm::translate(glm::mat4(1.0f),glm::vec3(speed *speedScale ,0.0f,0.0f)) ;
     matrix_ = matrix_ * translate;
 }
