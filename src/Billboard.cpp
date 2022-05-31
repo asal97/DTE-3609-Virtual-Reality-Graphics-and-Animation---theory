@@ -7,7 +7,7 @@
 
 Billboard::Billboard()
 {
- matrix_ = glm::scale(glm::mat4(1.0f),glm::vec3(5.0f,3.0f,2.0f)) * glm::translate(glm::mat4(1.0f),glm::vec3(5.0f,10.0f,0.0f));
+ matrix_ = glm::scale(glm::mat4(1.0f),glm::vec3(10.0f,6.0f,2.0f)) * glm::translate(glm::mat4(1.0f),glm::vec3(0.0f,15.0f,0.0f));
 }
 Billboard::~Billboard()
 {
@@ -90,12 +90,12 @@ void Billboard::DrawTexture(){
 
     int width, height, nrChannels;
      stbi_set_flip_vertically_on_load(0);
-    unsigned char *data = stbi_load("D:/UIT/VG-3609/start_code/assets/gameover.jpg", &width, &height, &nrChannels, 0);
+    unsigned char *data = stbi_load("D:/UIT/VG-3609/start_code/assets/gameover.png", &width, &height, &nrChannels, 0);
 
     // load and generate the texture
        if (data)
     {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
     }
     else
     {

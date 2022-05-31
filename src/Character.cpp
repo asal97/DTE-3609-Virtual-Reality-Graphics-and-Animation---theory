@@ -215,7 +215,7 @@ void Character::moveUpward()
     if(colState_ == state::notColided && jumpState_ == Jstate::notJump)
     {
         jumpState_ = Jstate::jump;
-        velocity_.y = 1.9f;
+        velocity_.y = 5.0f;
     }
 }
 void Character::privateUpdate()
