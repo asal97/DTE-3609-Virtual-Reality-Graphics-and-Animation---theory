@@ -159,18 +159,18 @@ void display() {
 //    GLCall(glDisable(GL_DEPTH_TEST));
 
       gm->update(counter.fps());
-  if (keyPressed[KEY_ID_W] == true)
-    gm->getCam()->moveForward();
-  if (keyPressed[KEY_ID_A] == true)
-    gm->getCam()->moveLeft();
-  if (keyPressed[KEY_ID_D] == true)
-    gm->getCam()->moveRight();
-  if (keyPressed[KEY_ID_S] == true)
-    gm->getCam()->moveBackward();
-  if (keyPressed[KEY_ID_SPACE] == true)
-    gm->getCam()->moveUp();
-  if (keyPressed[KEY_ID_C] == true)
-    gm->getCam()->moveDown();
+//  if (keyPressed[KEY_ID_W] == true)
+//    gm->getCam()->moveForward();
+//  if (keyPressed[KEY_ID_A] == true)
+//    gm->getCam()->moveLeft();
+//  if (keyPressed[KEY_ID_D] == true)
+//    gm->getCam()->moveRight();
+//  if (keyPressed[KEY_ID_S] == true)
+//    gm->getCam()->moveBackward();
+//  if (keyPressed[KEY_ID_SPACE] == true)
+//    gm->getCam()->moveUp();
+//  if (keyPressed[KEY_ID_C] == true)
+//    gm->getCam()->moveDown();
 //  if (keyPressed[KEY_ID_G] == true)
 //    gm->getCam()->rotateLeft();
 //  if (keyPressed[KEY_ID_H] == true)
@@ -194,24 +194,24 @@ void keyDown(unsigned char key, int x, int y) {
 #endif
     break;
 
-  case 'w':
-    keyPressed[KEY_ID_W] = true;
-    break;
-  case 'a':
-    keyPressed[KEY_ID_A] = true;
-    break;
-  case 's':
-    keyPressed[KEY_ID_S] = true;
-    break;
-  case 'd':
-    keyPressed[KEY_ID_D] = true;
-    break;
-  case ' ':
-    keyPressed[KEY_ID_SPACE] = true;
-    break;
-  case 'c':
-    keyPressed[KEY_ID_C] = true;
-    break;
+//  case 'w':
+//    keyPressed[KEY_ID_W] = true;
+//    break;
+//  case 'a':
+//    keyPressed[KEY_ID_A] = true;
+//    break;
+//  case 's':
+//    keyPressed[KEY_ID_S] = true;
+//    break;
+//  case 'd':
+//    keyPressed[KEY_ID_D] = true;
+//    break;
+//  case ' ':
+//    keyPressed[KEY_ID_SPACE] = true;
+//    break;
+//  case 'c':
+//    keyPressed[KEY_ID_C] = true;
+//    break;
 //  case 'g':
 //    keyPressed[KEY_ID_G] = true;
 //    break;
@@ -228,24 +228,24 @@ void keyDown(unsigned char key, int x, int y) {
 
 void keyUp(unsigned char key, int x, int y) {
   switch (key) {
-  case 'w':
-    keyPressed[KEY_ID_W] = false;
-    break;
-  case 'a':
-    keyPressed[KEY_ID_A] = false;
-    break;
-  case 's':
-    keyPressed[KEY_ID_S] = false;
-    break;
-  case 'd':
-    keyPressed[KEY_ID_D] = false;
-    break;
-  case ' ':
-    keyPressed[KEY_ID_SPACE] = false;
-    break;
-  case 'c':
-    keyPressed[KEY_ID_C] = false;
-    break;
+//  case 'w':
+//    keyPressed[KEY_ID_W] = false;
+//    break;
+//  case 'a':
+//    keyPressed[KEY_ID_A] = false;
+//    break;
+//  case 's':
+//    keyPressed[KEY_ID_S] = false;
+//    break;
+//  case 'd':
+//    keyPressed[KEY_ID_D] = false;
+//    break;
+//  case ' ':
+//    keyPressed[KEY_ID_SPACE] = false;
+//    break;
+//  case 'c':
+//    keyPressed[KEY_ID_C] = false;
+//    break;
 
   case 'j':
     keyPressed[KEY_ID_UP] = false;
