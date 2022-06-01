@@ -58,14 +58,14 @@ void GameManager::privateInit()
                     "Score", {100.0f,100.0f, 50.0f}, GLUT_BITMAP_TIMES_ROMAN_24, {1.0f, 1.0f, 1.0f} ));
     this->addSubObject(text_);
 
-
-
     std::ifstream infile;
     infile.open("Highscore.dat");
     int data;
     infile >> data;
     text_->highscore = (int)data;
 
+//    minimap_.reset(new Minimap());
+//    this->addSubObject(minimap_);
 
     skybox_.reset(new Skybox());
     this->addSubObject(skybox_);

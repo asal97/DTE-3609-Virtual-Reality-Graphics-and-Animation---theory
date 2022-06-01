@@ -21,7 +21,7 @@ void HelperText::strokeCharacter(){
 
         matrix_ = glm::scale(glm::mat4(1.0f),glm::vec3(1.0f,1.0f,5.0f));
         //starting from left most corner
-        glRasterPos3f(1.0f, 0.9f, 0.0f);
+        glRasterPos3f(-.9f, 0.9f, 0.0f);
 
         glLineWidth(100.0f);
 

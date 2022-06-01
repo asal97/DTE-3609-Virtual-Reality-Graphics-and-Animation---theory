@@ -21,6 +21,10 @@ bool keyPressed[30];
 int mousePosX, mousePosY;
 float moveX, moveY;
 
+//minimap code
+
+/*
+
 float vertices[4 * 3 * 2] = {
     -1.0f,  1.0f,  0.0f, 1.0f,
     -1.0f, 0.5f,  0.0f, 0.0f,
@@ -45,17 +49,25 @@ std::shared_ptr<VertexArray> vao;
 std::shared_ptr<IndexBuffer> ibo;
 std::shared_ptr<Shader> shader;
 
+*/
+
 void init() {
-    glewInit();
+      glewInit();
 
       GLCall(glClearColor(1.0, 1.0, 1.0, 0.0));
       glShadeModel(GL_SMOOTH);
       glEnable(GL_DEPTH_TEST);
 
-      GLCall(glEnable(GL_BLEND));
-      GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
-
       counter.start();
+
+      gm.reset(new GameManager());
+      gm->init();
+      //Minimap code
+/*
+
+     GLCall(glEnable(GL_BLEND));
+   GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+
 
       vbo.reset(new VertexBuffer(vertices, 4 * 3 * 2 * sizeof(float)));
       layout.reset(new VertexBufferLayout());
@@ -64,8 +76,7 @@ void init() {
       shader.reset(new Shader());
       shader->initShader(("D:/UIT/VG-3609/start_code/include/Minimap.shader"));
 
-      gm.reset(new GameManager());
-      gm->init();
+
 
 
       GLCall(glGenFramebuffers(1, &fbo));
@@ -105,7 +116,9 @@ void init() {
       ibo->Unbind();
       shader->Unbind();
 
+
     GLCall(glDisable(GL_BLEND));
+    */
 
       for (int i = 0; i < 30; i++)
         keyPressed[i] = false;
@@ -118,6 +131,9 @@ void display() {
 
     gm->update(counter.fps());
     gm->render();
+
+    //Minimap code
+    /*
 
   // Render fbo to texture
     GLCall(glBindFramebuffer(GL_FRAMEBUFFER, fbo)); //fbo stuff
@@ -138,8 +154,9 @@ void display() {
     ibo->Unbind();
     vao->Unbind();
     shader->Unbind();
+    */
 
-    GLCall(glDisable(GL_DEPTH_TEST));
+//    GLCall(glDisable(GL_DEPTH_TEST));
 
       gm->update(counter.fps());
   if (keyPressed[KEY_ID_W] == true)

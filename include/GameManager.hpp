@@ -3,9 +3,6 @@
 
 #include <windows.h>
 
-#include "Minimap.h"
-#include <GL/gl.h>
-#include <GL/glu.h>
 
 #include "SceneObject.hpp"
 #include "Landscape.hpp"
@@ -17,6 +14,10 @@
 #include "Billboard.h"
 #include "Monster.h"
 #include "helpertext.h"
+
+#include <GL/gl.h>
+#include <GL/glu.h>
+
 
 
 class GameManager : public SceneObject
@@ -41,7 +42,6 @@ class GameManager : public SceneObject
     std::shared_ptr<Text> text_;
     std::shared_ptr<HelperText> helptext_;
     std::shared_ptr<Snow> snow_;
-    std::shared_ptr<Minimap> minimap_;
     std::shared_ptr<Skybox> skybox_;
         std::shared_ptr<Billboard> billboard_;
         std::shared_ptr<Monster> monster_;

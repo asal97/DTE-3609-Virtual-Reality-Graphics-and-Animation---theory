@@ -37,7 +37,6 @@ set( INCLUDE
         include/stb_image.h
         include/text.h
         include/snow.h
-        include/minimap.h
         include/vertexbuffer.h
         include/glCall.h
         include/IndexBuffer.h
@@ -66,7 +65,6 @@ set(SRCS
         src/stb_image.cpp
         src/text.cpp
         src/snow.cpp
-        src/minimap.cpp
         src/vertexbuffer.cpp
         src/glCall.cpp
         src/IndexBuffer.cpp
@@ -77,7 +75,6 @@ set(SRCS
         src/Billboard.cpp
         src/Monster.cpp
         src/helpertext.cpp
-
 	app/main.cpp
 
 
