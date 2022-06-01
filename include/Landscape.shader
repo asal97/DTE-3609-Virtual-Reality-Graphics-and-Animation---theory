@@ -25,7 +25,7 @@ out vec2 v_TexCoord;
 void main()
 {
         gl_Position = projection * view * model * position;
-        Normal = aNormal;
+        Normal = mat3(transpose(inverse(model))) * aNormal;
         v_TexCoord = texCoord;
         LightPos = vec3(view * lightPos);
         FragPos = vec3(view * model * position);
@@ -53,7 +53,6 @@ void main()
 {
        vec4 texColor = mix(texture(u_Texture, v_TexCoord),texture(u_Texture2, v_TexCoord),0.5);
 
-//        color = texColor;
 
        vec3 light_ambient = vec3(0.2f,0.2f,0.2f);
        vec3 ambient = light_ambient * texture(material_diffuse, v_TexCoord).rgb;
@@ -76,56 +75,8 @@ void main()
        vec3 result = ambient + diffuse + specular;
 
 
+       color = mix(texColor, vec4(result, 1.0), 0.5);
 
-       ////////material light
-//        vec3 lightColor = vec3(1.0f, 1.0f, 1.0f);
-//        // ambient
-//        vec3 material_ambient = vec3(1.0f, 0.5f, 0.31f);
-//        vec3 ambient = lightColor * material_ambient;
-
-//        // diffuse
-//        vec3 norm = normalize(Normal);
-//        vec3 lightDir = normalize(LightPos - FragPos);
-//        float diff = max(dot(norm, lightDir), 0.0);
-//        vec3 material_diffuse = vec3(1.0f, 0.5f, 0.31f);
-//        vec3 diffuse = lightColor * (diff * material_diffuse);
-
-////        // specular
-//        vec3 viewDir = normalize(camera- FragPos);
-//        vec3 reflectDir = reflect(-lightDir, norm);
-//        float spec = pow(max(dot(viewDir, reflectDir), 0.0),32.0f);
-//        vec3 material_specular = vec3(0.5f, 0.5f, 0.5f);
-//        vec3 specular = lightColor * (spec * material_specular);
-
-//        vec3 result = ambient + diffuse + specular;
-
-
-
-
-//        normal light
-//        color = vec4(result, 1.0);
-
-//       vec3 lightColor = vec3(1.0f, 1.0f, 1.0f);
-
-//       float ambientStrength = 0.1;
-//       vec3 ambient = ambientStrength * lightColor;
-
-//       //Diffuse
-//       vec3 norm = normalize(Normal);
-//       vec3 lightDir = normalize(LightPos - FragPos);
-//       float diff = max(dot(norm, lightDir), 0.0);
-//       vec3 diffuse = diff * lightColor;
-
-//       //Specular
-//       float specularStrength = 0.5;
-//       vec3 viewDir = normalize(-FragPos);
-//       vec3 reflectDir = reflect(-lightDir, norm);
-//       float spec = pow(max(dot(viewDir, reflectDir), 0.0), 2);
-//       vec3 specular = specularStrength * spec * lightColor;
-
-//       vec3 result = (ambient + diffuse + specular);
-
-       color = mix(texColor, vec4(result, 1.0), 0.7);
 };
 
 

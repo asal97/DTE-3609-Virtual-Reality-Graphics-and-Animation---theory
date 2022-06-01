@@ -20,7 +20,7 @@ void main()
 {
         gl_Position = projection * view * model * position;
         v_TexCoord = texCoord;
-        Normal = aNormal;
+        Normal = mat3(transpose(inverse(model))) * aNormal;
         LightPos = vec3(view * vec4(vec3(lightPos), 1.0));
         FragPos = vec3(view * model * position);
 };

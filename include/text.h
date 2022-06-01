@@ -30,11 +30,11 @@ public:
     void privateRender();
     void privateUpdate();
     int state_ = Textstate::Tnormal;
-      int health = 3;
-
+    int health = 3;
+    int highscore = 0 ;
+    int score = 0;
 
 private:
-    int score = 0;
 
     P3 pos_;
     void *font_;

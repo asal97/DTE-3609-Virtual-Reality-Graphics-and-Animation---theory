@@ -29,7 +29,7 @@ void Snow::texture(){
 
     //width of texture, height of texture and number of colour channels
     int widthTex, heightTex, nrChannels;
-    unsigned char *data = stbi_load("D:/UIT/VG-3609/start_code/assets/Snowflake2.png",
+    unsigned char *data = stbi_load("D:/UIT/VG-3609/start_code/assets/snow.png",
                                         &widthTex, &heightTex, &nrChannels, 0);
     if(data){
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, widthTex, heightTex, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);

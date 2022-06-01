@@ -1,5 +1,6 @@
 #include "../include/GameManager.hpp"
 #include <iostream>
+#include <fstream>
 GameManager::GameManager()
 {
 }
@@ -32,8 +33,7 @@ void GameManager::privateInit()
 
   // Adding the camera to the scene
   cam_.reset(new Camera());
-//  snow_.reset(new Snow());
-//     this->addSubObject(snow_);
+
 
 
   ls_.reset(new Landscape(glm::vec3(-200.0f* cos(glm::radians(15.0f)),-200*sin(glm::radians(15.0f)),0.0f)));
@@ -55,8 +55,14 @@ void GameManager::privateInit()
   this->addSubObject(character_);
 
     text_.reset(new Text(
-                    "Score", {100.0f,100.0f, 50.0f}, GLUT_BITMAP_TIMES_ROMAN_24, {0.0f, 1.0f, 0.0f} ));
+                    "Score", {100.0f,100.0f, 50.0f}, GLUT_BITMAP_TIMES_ROMAN_24, {1.0f, 1.0f, 1.0f} ));
     this->addSubObject(text_);
+
+    std::ifstream infile;
+    infile.open("Highscore.dat");
+    int data;
+    infile >> data;
+    text_->highscore = (int)data;
 
 //    minimap_.reset(new Minimap());
 //    this->addSubObject(minimap_);
@@ -72,6 +78,9 @@ void GameManager::privateInit()
 
     billboard_.reset(new Billboard());
     this->addSubObject(billboard_);
+
+    snow_.reset(new Snow());
+       this->addSubObject(snow_);
 
 }
 
@@ -110,6 +119,12 @@ void GameManager::CollisionDetection(){
             else
             {
                 text_->state_ = Textstate::Tcollided;
+                if(text_->score > text_->highscore){
+                    text_->highscore = text_->score;
+                    std::ofstream outfile;
+                    outfile.open("Highscore.dat",std::ios::trunc);
+                    outfile << text_->score;
+                }
                 billboard_->draw = true;
             }
             std::cout<<character_->colState_<<std::endl;
