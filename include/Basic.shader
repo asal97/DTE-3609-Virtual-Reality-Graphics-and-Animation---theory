@@ -9,6 +9,7 @@ uniform mat4 u_MVP;
 
 void main()
 {
+    //setting position and sending texCoord to the fragment shader
 	gl_Position = u_MVP * position;
         v_TexCoord = texCoord;
 };
@@ -26,9 +27,9 @@ uniform vec4 u_Color;
 
 void main()
 {
+    //setting a texture
         vec4 texColor = texture(u_Texture, v_TexCoord);
         color = texColor;
-//        color = u_Color;
 };
 
 

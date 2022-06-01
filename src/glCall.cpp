@@ -1,5 +1,7 @@
 #include "../include/glCall.h"
 
+// for being able to identify possible errors happening with their specific
+
 void GLClearError() {
     while (glGetError() != GL_NO_ERROR);
 

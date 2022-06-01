@@ -18,6 +18,7 @@ uniform vec4 lightPos;
 
 void main()
 {
+    //setting position and calculating lightPos and frag pos to send in fragment shader
         gl_Position = projection * view * model * position;
         v_TexCoord = texCoord;
         Normal = mat3(transpose(inverse(model))) * aNormal;
@@ -46,10 +47,11 @@ in vec3 FragPos;
 void main()
 {
         vec4 texColor = texture(u_Texture, v_TexCoord);
-//        color = texColor;
 
+        //setting white light
         vec3 lightColor = vec3(1.0f, 1.0f, 1.0f);
 
+        //setting ambient light
         float ambientStrength = 0.1;
         vec3 ambient = ambientStrength * lightColor;
 
@@ -67,7 +69,7 @@ void main()
         vec3 specular = specularStrength * spec * lightColor;
 
         vec3 result = (ambient + diffuse + specular);
-
+        // mixing our texture with the light
         color = mix(texColor, vec4(result, 1.0), 0.3);
 
 };

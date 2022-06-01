@@ -36,17 +36,17 @@ void GameManager::privateInit()
 
 
 
-  ls_.reset(new Landscape(glm::vec3(-200.0f* cos(glm::radians(15.0f)),-200*sin(glm::radians(15.0f)),0.0f)));
+  ls_.reset(new Landscape(glm::vec3(-200.0f* cos(glm::radians(20.0f)),-200*sin(glm::radians(20.0f)),0.0f)));
    this->addSubObject(ls_);
   ls_.reset(new Landscape(glm::vec3(0.0f,0.0f,0.0f)));
   this->addSubObject(ls_);
-  ls_.reset(new Landscape(glm::vec3(200.0f * cos(glm::radians(15.0f)),200*sin(glm::radians(15.0f)),0.0f)));
+  ls_.reset(new Landscape(glm::vec3(200.0f * cos(glm::radians(20.0f)),200*sin(glm::radians(20.0f)),0.0f)));
    this->addSubObject(ls_);
-  ls_.reset(new Landscape(glm::vec3(2 * 200.0f * cos(glm::radians(15.0f)),2 * 200*sin(glm::radians(15.0f)),0.0f)));
+  ls_.reset(new Landscape(glm::vec3(2 * 200.0f * cos(glm::radians(20.0f)),2 * 200*sin(glm::radians(20.0f)),0.0f)));
   this->addSubObject(ls_);
-  ls_.reset(new Landscape(glm::vec3(3 * 200.0f * cos(glm::radians(15.0f)),3 * 200*sin(glm::radians(15.0f)),0.0f)));
+  ls_.reset(new Landscape(glm::vec3(3 * 200.0f * cos(glm::radians(20.0f)),3 * 200*sin(glm::radians(20.0f)),0.0f)));
   this->addSubObject(ls_);
-  ls_.reset(new Landscape(glm::vec3(4 * 200.0f * cos(glm::radians(15.0f)),4 * 200*sin(glm::radians(15.0f)),0.0f)));
+  ls_.reset(new Landscape(glm::vec3(4 * 200.0f * cos(glm::radians(20.0f)),4 * 200*sin(glm::radians(20.0f)),0.0f)));
   this->addSubObject(ls_);
 
 
@@ -58,14 +58,16 @@ void GameManager::privateInit()
                     "Score", {100.0f,100.0f, 50.0f}, GLUT_BITMAP_TIMES_ROMAN_24, {1.0f, 1.0f, 1.0f} ));
     this->addSubObject(text_);
 
+
+
     std::ifstream infile;
     infile.open("Highscore.dat");
     int data;
     infile >> data;
     text_->highscore = (int)data;
 
-//    minimap_.reset(new Minimap());
-//    this->addSubObject(minimap_);
+    minimap_.reset(new Minimap());
+    this->addSubObject(minimap_);
 
     skybox_.reset(new Skybox());
     this->addSubObject(skybox_);
@@ -81,6 +83,10 @@ void GameManager::privateInit()
 
     snow_.reset(new Snow());
        this->addSubObject(snow_);
+
+    helptext_.reset(new HelperText(
+                    "Press J for jump", {100.0f,100.0f, 50.0f}, GLUT_BITMAP_TIMES_ROMAN_24, {0.0f, 0.0f, 0.0f} ));
+    this->addSubObject(helptext_);
 
 }
 
@@ -103,8 +109,6 @@ void GameManager::CollisionDetection(){
     glm::vec3 monsterPos = monster_->getPos();
     float monsterSize = monster_->getSize();
 
-//    std::cout << "monster x "<<monsterPos.x <<" monster y " << monsterPos.y<<std::endl;
-//    std::cout << "char x "<<charPos.x <<" char y " << charPos.y<<std::endl;
 
     bool colX = (charPos.x - charSize) <= (monsterPos.x + monsterSize) && (charPos.x + charSize) >= (monsterPos.x - monsterSize);
     bool colY = (charPos.y - charSize) <= (monsterPos.y + monsterSize) && (charPos.y + charSize) >= (monsterPos.y - monsterSize);

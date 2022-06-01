@@ -81,10 +81,10 @@ void display() {
     gm->getCam()->moveUp();
   if (keyPressed[KEY_ID_C] == true)
     gm->getCam()->moveDown();
-  if (keyPressed[KEY_ID_G] == true)
-    gm->getCam()->rotateLeft();
-  if (keyPressed[KEY_ID_H] == true)
-    gm->getCam()->rotateRight();
+//  if (keyPressed[KEY_ID_G] == true)
+//    gm->getCam()->rotateLeft();
+//  if (keyPressed[KEY_ID_H] == true)
+//    gm->getCam()->rotateRight();
   if (keyPressed[KEY_ID_UP] == true)
     gm->getCharacter()->moveUpward();
 
@@ -122,12 +122,12 @@ void keyDown(unsigned char key, int x, int y) {
   case 'c':
     keyPressed[KEY_ID_C] = true;
     break;
-  case 'g':
-    keyPressed[KEY_ID_G] = true;
-    break;
-  case 'h':
-    keyPressed[KEY_ID_H] = true;
-    break;
+//  case 'g':
+//    keyPressed[KEY_ID_G] = true;
+//    break;
+//  case 'h':
+//    keyPressed[KEY_ID_H] = true;
+//    break;
   case 'j':
     keyPressed[KEY_ID_UP] = true;
     break;
@@ -156,12 +156,12 @@ void keyUp(unsigned char key, int x, int y) {
   case 'c':
     keyPressed[KEY_ID_C] = false;
     break;
-  case 'g':
-    keyPressed[KEY_ID_G] = false;
-    break;
-  case 'h':
-    keyPressed[KEY_ID_H] = false;
-    break;
+//  case 'g':
+//    keyPressed[KEY_ID_G] = false;
+//    break;
+//  case 'h':
+//    keyPressed[KEY_ID_H] = false;
+//    break;
   case 'j':
     keyPressed[KEY_ID_UP] = false;
     break;

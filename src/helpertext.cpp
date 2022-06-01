@@ -1,15 +1,15 @@
 #include "../include/SceneObject.hpp"
 #include "../include/GameManager.hpp"
-#include "../include/Text.h"
+#include "../include/helpertext.h"
 
 
 
-Text::Text(char* string, P3 pos, void* font, ColourVec colour)
+HelperText::HelperText(char* string, P3 pos, void* font, ColourVec colour)
     : string_(string), pos_(pos), font_(font), colour_(colour) {
 }
 
 
-void Text::strokeCharacter(){
+void HelperText::strokeCharacter(){
 
     //drawing the text in a fixed position in the left most corner of window
     glMatrixMode(GL_PROJECTION);
@@ -21,7 +21,7 @@ void Text::strokeCharacter(){
 
         matrix_ = glm::scale(glm::mat4(1.0f),glm::vec3(1.0f,1.0f,5.0f));
         //starting from left most corner
-        glRasterPos3f(-0.9f, -0.9f, 0.0f);
+        glRasterPos3f(-1.0f, 0.9f, 0.0f);
 
         glLineWidth(100.0f);
 
@@ -39,11 +39,11 @@ void Text::strokeCharacter(){
 
 }
 
-void Text::privateInit(){
+void HelperText::privateInit(){
 
 }
 
-void Text::privateRender(){
+void HelperText::privateRender(){
     glEnable(GL_COLOR_MATERIAL);
 
     glColor3f(colour_.x, colour_.y, colour_.z);
@@ -52,10 +52,6 @@ void Text::privateRender(){
 
     glDisable(GL_COLOR_MATERIAL);
 }
-void Text::privateUpdate(){
-    //as long as the game is running keep adding the score
-    if (state_ == Textstate::Tnormal){
-        score +=1;
-        string_ = "Score : "+ std::to_string(score) + "               " + "Level : " + std::to_string(((score/300)+1)) + "               Health : " + std::to_string(health)+ "               Highscore : " + std::to_string(highscore);
-    }
+void HelperText::privateUpdate(){
+
 }

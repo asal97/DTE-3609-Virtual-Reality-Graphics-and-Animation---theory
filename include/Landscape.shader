@@ -51,9 +51,10 @@ in vec3 Normal;
 
 void main()
 {
+       //mixing two images for multitexturing
        vec4 texColor = mix(texture(u_Texture, v_TexCoord),texture(u_Texture2, v_TexCoord),0.5);
 
-
+       // setting diffuse map with ambient, diffuse and specular lighting
        vec3 light_ambient = vec3(0.2f,0.2f,0.2f);
        vec3 ambient = light_ambient * texture(material_diffuse, v_TexCoord).rgb;
 
@@ -74,7 +75,7 @@ void main()
 
        vec3 result = ambient + diffuse + specular;
 
-
+      // mixing our images with the diffuse map
        color = mix(texColor, vec4(result, 1.0), 0.5);
 
 };

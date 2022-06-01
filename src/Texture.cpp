@@ -9,6 +9,7 @@ Texture::Texture(const std::string& path)
     :m_RenderID(0),m_FilePath(path), m_LocalBuffer(nullptr),
     m_Width(0), m_Height(0), m_BPP(0)
 {
+    //setting a 2d texture function
      stbi_set_flip_vertically_on_load(1);
     m_LocalBuffer = stbi_load(path.c_str(), &m_Width, &m_Height, &m_BPP, 4);
     GLCall(glGenTextures(1, &m_RenderID));
@@ -31,6 +32,8 @@ Texture::Texture(const std::vector<std::string> faces)
     :m_RenderID(0), m_LocalBuffer(nullptr),
     m_Width(0), m_Height(0), m_BPP(0)
 {
+
+    //setting texture for a cube map object such as sky box
     stbi_set_flip_vertically_on_load(0);
     GLCall(glGenTextures(1, &m_RenderID));
     GLCall(glBindTexture(GL_TEXTURE_CUBE_MAP, m_RenderID));

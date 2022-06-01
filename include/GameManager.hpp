@@ -16,6 +16,7 @@
 #include "Skybox.h"
 #include "Billboard.h"
 #include "Monster.h"
+#include "helpertext.h"
 
 
 class GameManager : public SceneObject
@@ -38,6 +39,7 @@ class GameManager : public SceneObject
     std::shared_ptr<Character> character_;
     std::shared_ptr<Camera> cam_;
     std::shared_ptr<Text> text_;
+    std::shared_ptr<HelperText> helptext_;
     std::shared_ptr<Snow> snow_;
     std::shared_ptr<Minimap> minimap_;
     std::shared_ptr<Skybox> skybox_;

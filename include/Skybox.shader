@@ -8,6 +8,7 @@ uniform mat4 u_MVP;
 
 void main(){
 
+    //setting position and sending texcoord through fragment
         v_TexCoord = position;
         gl_Position = u_MVP * vec4(position,1.0);
 };
@@ -24,6 +25,7 @@ uniform samplerCube u_Skybox;
 
 void main()
 {
+    //setting up skybox with texture
           FragColor = texture(u_Skybox,v_TexCoord);
 };
 

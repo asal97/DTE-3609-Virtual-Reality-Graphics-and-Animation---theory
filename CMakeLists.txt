@@ -48,6 +48,7 @@ set( INCLUDE
         include/Skybox.h
         include/Billboard.h
         include/Monster.h
+        include/helpertext.h
 
 
         include/Basic.shader
@@ -75,6 +76,7 @@ set(SRCS
         src/Skybox.cpp
         src/Billboard.cpp
         src/Monster.cpp
+        src/helpertext.cpp
 
 	app/main.cpp
 

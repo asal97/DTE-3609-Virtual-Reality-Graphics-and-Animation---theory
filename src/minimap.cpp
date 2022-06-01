@@ -56,9 +56,6 @@ void Minimap::privateRender(){
         glTexCoord2f(0.0f, 1.0f); glVertex3f(-500.0f, 100.0f,100.0f);
     glEnd();
     glDisable(GL_TEXTURE_2D);
-
-
-
 }
 void Minimap::privateUpdate(){
 
