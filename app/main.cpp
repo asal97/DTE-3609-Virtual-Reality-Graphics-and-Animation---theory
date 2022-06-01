@@ -21,54 +21,127 @@ bool keyPressed[30];
 int mousePosX, mousePosY;
 float moveX, moveY;
 
+float vertices[4 * 3 * 2] = {
+    -1.0f,  1.0f,  0.0f, 1.0f,
+    -1.0f, 0.5f,  0.0f, 0.0f,
+    -0.5f, 0.5f,  1.0f, 0.0f,
+
+    -1.0f,  1.0f,  0.0f, 1.0f,
+    -0.5f, 0.5f,  1.0f, 0.0f,
+    -0.5f,  1.0f,  1.0f, 1.0f
+};
+
+unsigned int indices[6] = {
+        0, 1, 2,
+        3, 4, 5
+};
+
+unsigned int fbo;
+unsigned int rbo;
+unsigned int texture;
+std::shared_ptr<VertexBuffer> vbo;
+std::shared_ptr<VertexBufferLayout> layout;
+std::shared_ptr<VertexArray> vao;
+std::shared_ptr<IndexBuffer> ibo;
+std::shared_ptr<Shader> shader;
+
 void init() {
     glewInit();
 
-  glClearColor(0.0, 0.0, 0.0, 0.0);
-  glShadeModel(GL_SMOOTH);
-  glEnable(GL_DEPTH_TEST);
+      GLCall(glClearColor(1.0, 1.0, 1.0, 0.0));
+      glShadeModel(GL_SMOOTH);
+      glEnable(GL_DEPTH_TEST);
 
-  counter.start();
+      GLCall(glEnable(GL_BLEND));
+      GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
-  gm.reset(new GameManager());
-  gm->init();
+      counter.start();
 
-  for (int i = 0; i < 30; i++)
-    keyPressed[i] = false;
+      vbo.reset(new VertexBuffer(vertices, 4 * 3 * 2 * sizeof(float)));
+      layout.reset(new VertexBufferLayout());
+      vao.reset(new VertexArray());
+      ibo.reset(new IndexBuffer(indices, 6));
+      shader.reset(new Shader());
+      shader->initShader(("D:/UIT/VG-3609/start_code/include/Minimap.shader"));
 
-
-
-
-  GLfloat white_light[] = {1.0, 1.0, 1.0, 1.0};
-  glLightfv(GL_LIGHT0, GL_SPECULAR, white_light);
-
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
+      gm.reset(new GameManager());
+      gm->init();
 
 
+      GLCall(glGenFramebuffers(1, &fbo));
+      GLCall(glBindFramebuffer(GL_FRAMEBUFFER, fbo));
+
+      // Create a texture for the framebuffer
+      GLCall(glGenTextures(1, &texture));
+      GLCall(glBindTexture(GL_TEXTURE_2D, texture));
+      GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 900, 700, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL));
+      GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+      GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+
+      // Attach to frambuffer
+      GLCall(glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0));
+      GLCall(glBindTexture(GL_TEXTURE_2D, 0));
+
+      // Renderbuffer stuff
+      GLCall(glGenRenderbuffers(1, &rbo));
+      GLCall(glBindRenderbuffer(GL_RENDERBUFFER, rbo));
+      GLCall(glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 900, 700));
+      glBindRenderbuffer(GL_RENDERBUFFER, 0);
+      GLCall(glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo));
+
+      if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+          std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
+      glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+      layout->Push<float>(2);
+      layout->Push<float>(2);
+
+      vao->AddBuffer(*vbo,*layout);
+
+      shader->Bind();
+      shader->SetUniform1i("u_Texture", 0);
+        vao->Unbind();
+      vbo->Unbind();
+      ibo->Unbind();
+      shader->Unbind();
+
+    GLCall(glDisable(GL_BLEND));
+
+      for (int i = 0; i < 30; i++)
+        keyPressed[i] = false;
 }
 
 void display() {
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-  gm->update(counter.fps());
-  gm->render();
+    GLCall(glEnable(GL_DEPTH_TEST));
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-//  GLenum err = glGetError();
-//  if (err != GL_NO_ERROR)
-//    std::cout<< "OpenGL error: " << gluErrorString(err) << std::endl;
-//  std::cout.flush();
+    gm->update(counter.fps());
+    gm->render();
 
-//  char *buff = (char*)glGetString(GL_VERSION);
-//  std::cout<< buff << std::endl;
+  // Render fbo to texture
+    GLCall(glBindFramebuffer(GL_FRAMEBUFFER, fbo)); //fbo stuff
+    GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
-//  buff = (char*)glGetString(GL_VENDOR);
-//  std::cout<< buff << std::endl;
-//  buff = (char*)glGetString(GL_RENDERER);
-//  std::cout<< buff<<std::endl;
-//  char *buff = (char*)glGetString(GL_EXTENSIONS);
-//  std::cout<< buff<<std::endl;
+    gm->render();
 
+    GLCall(glBindFramebuffer(GL_FRAMEBUFFER, 0));
+
+    shader->Bind();
+    vao->Bind();
+    ibo->Bind();
+    GLCall(glBindTexture(GL_TEXTURE_2D, texture));
+
+    GLCall(glDrawElements(GL_TRIANGLES, ibo->GetCount(), GL_UNSIGNED_INT, nullptr));
+
+    GLCall(glBindTexture(GL_TEXTURE_2D, 0));
+    ibo->Unbind();
+    vao->Unbind();
+    shader->Unbind();
+
+    GLCall(glDisable(GL_DEPTH_TEST));
+
+      gm->update(counter.fps());
   if (keyPressed[KEY_ID_W] == true)
     gm->getCam()->moveForward();
   if (keyPressed[KEY_ID_A] == true)
@@ -156,12 +229,7 @@ void keyUp(unsigned char key, int x, int y) {
   case 'c':
     keyPressed[KEY_ID_C] = false;
     break;
-//  case 'g':
-//    keyPressed[KEY_ID_G] = false;
-//    break;
-//  case 'h':
-//    keyPressed[KEY_ID_H] = false;
-//    break;
+
   case 'j':
     keyPressed[KEY_ID_UP] = false;
     break;

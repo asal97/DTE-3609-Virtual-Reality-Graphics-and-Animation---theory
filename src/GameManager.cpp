@@ -66,8 +66,6 @@ void GameManager::privateInit()
     infile >> data;
     text_->highscore = (int)data;
 
-    minimap_.reset(new Minimap());
-    this->addSubObject(minimap_);
 
     skybox_.reset(new Skybox());
     this->addSubObject(skybox_);

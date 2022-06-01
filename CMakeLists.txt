@@ -50,7 +50,7 @@ set( INCLUDE
         include/Monster.h
         include/helpertext.h
 
-
+        include/Minimap.shader
         include/Basic.shader
         include/Skybox.shader
         include/Landscape.shader
